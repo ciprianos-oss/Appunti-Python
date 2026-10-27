@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "Se utilizzi o citi questi appunti, ti chiedo di farlo con i metadati riportati di seguito."
+title: "Appunti Python"
+type: software
+abstract: >-
+  Raccolta di appunti di teoria, script ed esercizi di laboratorio sul
+  linguaggio Python: basi e sintassi, stringhe, strutture dati, gestione dei
+  file, gestione delle eccezioni e programmazione client-server.
+authors:
+  - family-names: "Salvatore"
+    given-names: "Cipriano"
+    alias: "ciprianos-oss"
+repository-code: "https://github.com/ciprianos-oss/Appunti-Python"
+url: "https://github.com/ciprianos-oss/Appunti-Python"
+date-released: "2026-10-27"
+keywords:
+  - Python
+  - appunti
+  - didattica
+  - programmazione
+  - client-server
