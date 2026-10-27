@@ -1,0 +1,315 @@
+================================================================================
+FILE JSON IN PYTHON
+================================================================================
+
+
+1. INTRODUZIONE
+--------------------------------------------------------------------------------
+JSON è l'acronimo di JavaScript Object Notation. È un formato di file di testo
+usato per memorizzare e scambiare dati strutturati in modo leggibile sia
+dall'uomo sia dalle macchine.
+
+Nato in ambito JavaScript, oggi è indipendente dal linguaggio ed è supportato da
+praticamente tutti i linguaggi di programmazione. È lo standard de facto per:
+
+- lo scambio di dati tra client e server (API web);
+- i file di configurazione delle applicazioni;
+- il salvataggio di dati strutturati e annidati.
+
+Rispetto al CSV, che rappresenta solo tabelle piatte, il JSON può descrivere
+strutture complesse: oggetti dentro oggetti, liste di oggetti, liste dentro
+oggetti.
+
+Esempio di contenuto di un file JSON:
+
+    {
+        "nome": "Giovanni",
+        "cognome": "Franco",
+        "eta": 18,
+        "classe": "5D",
+        "media": 4.2
+    }
+
+
+2. STRUTTURA E SINTASSI DEL JSON
+--------------------------------------------------------------------------------
+Un documento JSON è costruito a partire da due strutture:
+
+    OGGETTO  { }   insieme di coppie "chiave": valore, separate da virgole
+    ARRAY    [ ]   sequenza ordinata di valori, separati da virgole
+
+Regole fondamentali:
+- le chiavi sono SEMPRE stringhe racchiuse tra doppi apici;
+- le stringhe usano SOLO i doppi apici (i singoli apici non sono validi);
+- tra una coppia e l'altra va una virgola, ma NON dopo l'ultima;
+- non sono ammessi commenti;
+- i valori possono essere annidati senza limiti.
+
+Tipi di valore ammessi:
+
+    stringa    "testo"
+    numero     18   oppure   4.2
+    booleano   true   oppure   false      (minuscolo)
+    null       null                       (minuscolo)
+    oggetto    { ... }
+    array      [ ... ]
+
+
+3. CORRISPONDENZA TRA JSON E PYTHON
+--------------------------------------------------------------------------------
+Nella conversione, i tipi vengono tradotti secondo questa tabella:
+
+    PYTHON                   JSON
+    ------------------------ ------------------------
+    dict                     oggetto { }
+    list, tuple              array [ ]
+    str                      stringa
+    int, float               numero
+    True / False             true / false
+    None                     null
+
+Il processo di conversione da Python a JSON si chiama SERIALIZZAZIONE
+(o codifica); quello inverso, da JSON a Python, DESERIALIZZAZIONE (o
+decodifica).
+
+Attenzione: le tuple vengono scritte come array e, rileggendole, tornano come
+LISTE. Inoltre, in JSON le chiavi sono sempre stringhe: un dizionario con
+chiave intera {1: "a"} viene riletto come {"1": "a"}.
+
+
+4. IL MODULO json
+--------------------------------------------------------------------------------
+Python mette a disposizione il modulo json nella libreria standard, quindi non
+occorre installare nulla:
+
+    import json
+
+Le funzioni principali sono quattro, e si distinguono per l'ultima lettera:
+
+    json.dump(oggetto, file)      scrive un oggetto Python SU FILE
+    json.load(file)               legge un oggetto Python DA FILE
+    json.dumps(oggetto)           converte un oggetto in STRINGA JSON
+    json.loads(stringa)           converte una STRINGA JSON in oggetto
+
+Regola mnemonica: la "s" finale sta per "string". Le versioni senza "s"
+lavorano con i file, quelle con la "s" lavorano con le stringhe.
+
+
+5. SCRITTURA SU FILE: json.dump()
+--------------------------------------------------------------------------------
+Sintassi:
+
+    json.dump(oggetto, file, indent=4)
+
+Parametri:
+- oggetto : il dato Python da salvare (dizionario, lista, ...);
+- file    : il file aperto in scrittura;
+- indent  : numero di spazi di rientro. Se omesso, il JSON viene scritto su
+            un'unica riga, poco leggibile. Con indent=4 il file risulta
+            ordinato e leggibile.
+
+Altri parametri utili:
+- sort_keys=True      ordina le chiavi in ordine alfabetico;
+- ensure_ascii=False  mantiene i caratteri accentati (à, è, ò) anziché
+                      trasformarli in sequenze \uXXXX. Con questa opzione è
+                      consigliato aprire il file con encoding="utf-8".
+
+
+6. LETTURA DA FILE: json.load()
+--------------------------------------------------------------------------------
+Sintassi:
+
+    oggetto = json.load(file)
+
+La funzione legge il contenuto del file e lo converte nel corrispondente oggetto
+Python. Se il file contiene un oggetto JSON, il risultato è un dizionario; se
+contiene un array, il risultato è una lista.
+
+I tipi vengono ripristinati correttamente: a differenza del CSV, in cui ogni
+valore letto è una stringa, qui un numero resta un numero (18 torna int, 4.2
+torna float) e non occorre alcuna conversione.
+
+
+7. ESEMPIO COMPLETO
+--------------------------------------------------------------------------------
+    # Importazione del modulo json
+    import json
+
+    # Creazione dizionario dello studente
+    stud = {
+        "nome": "Giovanni",
+        "cognome": "Franco",
+        "eta": 18,
+        "classe": "5D",
+        "media": 4.2
+    }
+
+    # Scrittura del dizionario nel file JSON
+    with open("studente.json", "w") as myFile:
+        json.dump(stud, myFile, indent=4)
+
+    # Lettura del file studente.json
+    with open("studente.json", "r") as MyFile:
+        alunno_letto = json.load(MyFile)
+
+    print(alunno_letto)
+
+Analisi del codice:
+- import json rende disponibili le funzioni del modulo;
+- stud è un dizionario Python con i dati dello studente;
+- il primo with apre studente.json in scrittura ("w") e lo chiude
+  automaticamente al termine del blocco;
+- json.dump() serializza il dizionario e lo scrive nel file; indent=4 rende il
+  file leggibile;
+- il secondo with riapre il file in lettura ("r");
+- json.load() legge il file e restituisce un dizionario Python;
+- print() mostra il dizionario riletto.
+
+Contenuto di studente.json dopo l'esecuzione:
+
+    {
+        "nome": "Giovanni",
+        "cognome": "Franco",
+        "eta": 18,
+        "classe": "5D",
+        "media": 4.2
+    }
+
+Output a schermo:
+
+    {'nome': 'Giovanni', 'cognome': 'Franco', 'eta': 18, 'classe': '5D',
+     'media': 4.2}
+
+Si noti che a schermo Python mostra il dizionario con i singoli apici: è la
+rappresentazione di Python, non quella del JSON, che usa i doppi apici.
+
+
+8. STRUTTURE ANNIDATE E LISTE DI OGGETTI
+--------------------------------------------------------------------------------
+Il vantaggio principale del JSON è la possibilità di rappresentare dati
+complessi. Esempio: una classe con più studenti e una lista di voti.
+
+    classe = {
+        "nome": "5D",
+        "studenti": [
+            {"nome": "Giovanni", "cognome": "Franco", "voti": [4, 5, 4.5]},
+            {"nome": "Anna", "cognome": "Bianchi", "voti": [8, 7.5, 9]}
+        ]
+    }
+
+    with open("classe.json", "w") as f:
+        json.dump(classe, f, indent=4)
+
+Lettura e accesso ai dati:
+
+    with open("classe.json", "r") as f:
+        dati = json.load(f)
+
+    print(dati["nome"])                        # 5D
+    print(dati["studenti"][0]["cognome"])      # Franco
+    print(dati["studenti"][1]["voti"][2])      # 9
+
+Si accede ai dati concatenando chiavi (per i dizionari) e indici (per le liste).
+
+
+9. AGGIORNAMENTO DI UN FILE JSON
+--------------------------------------------------------------------------------
+Un file JSON non si modifica "in coda" come un file di testo: la procedura
+corretta è leggere tutto, modificare l'oggetto in memoria e riscrivere tutto.
+
+    # 1. Lettura
+    with open("studente.json", "r") as f:
+        stud = json.load(f)
+
+    # 2. Modifica in memoria
+    stud["media"] = 6.0
+    stud["indirizzo"] = "Informatica"
+
+    # 3. Riscrittura (il file viene sovrascritto)
+    with open("studente.json", "w") as f:
+        json.dump(stud, f, indent=4)
+
+Aprire il file con la modalità "a" (append) e usare json.dump() produrrebbe un
+file non valido, con più documenti JSON uno dopo l'altro.
+
+
+10. SERIALIZZAZIONE IN STRINGA: dumps() E loads()
+--------------------------------------------------------------------------------
+Quando il JSON non deve essere salvato su file (ad esempio perché viene inviato
+in rete o ricevuto da un'API), si usano le versioni che lavorano con le stringhe:
+
+    testo = json.dumps(stud, indent=4)     # dizionario -> stringa JSON
+    print(testo)
+
+    dizionario = json.loads(testo)         # stringa JSON -> dizionario
+    print(dizionario["nome"])
+
+
+11. GESTIONE DEGLI ERRORI
+--------------------------------------------------------------------------------
+Le due eccezioni più frequenti sono:
+
+    FileNotFoundError        il file non esiste
+    json.JSONDecodeError     il file esiste ma il contenuto non è un JSON valido
+                             (virgola finale, apici singoli, file vuoto, ...)
+
+Esempio di gestione:
+
+    try:
+        with open("studente.json", "r") as f:
+            stud = json.load(f)
+    except FileNotFoundError:
+        print("Il file non esiste.")
+    except json.JSONDecodeError:
+        print("Il file non contiene un JSON valido.")
+
+Un'ulteriore eccezione, TypeError, si verifica quando si prova a serializzare un
+oggetto non supportato (ad esempio un set o un oggetto di una classe
+personalizzata): in tal caso bisogna convertirlo in un tipo compatibile.
+
+
+12. ERRORI COMUNI
+--------------------------------------------------------------------------------
+- Confondere dump/load (file) con dumps/loads (stringhe).
+- Usare "a" al posto di "w" e ottenere un file JSON non valido.
+- Passare il NOME del file (stringa) a json.dump() invece dell'oggetto file.
+- Scrivere a mano file JSON con apici singoli o virgola dopo l'ultimo elemento.
+- Dimenticare indent e ritrovarsi un file illeggibile su una sola riga.
+- Aspettarsi che le tuple tornino tuple (tornano liste) o che le chiavi intere
+  restino intere (diventano stringhe).
+- Provare a serializzare tipi non supportati (set, date, oggetti personalizzati).
+- Aprire il file in lettura prima di averlo creato.
+
+
+13. CONFRONTO TRA TXT, CSV E JSON
+--------------------------------------------------------------------------------
+    CARATTERISTICA   TXT              CSV                JSON
+    ---------------- ---------------- ------------------ ----------------------
+    Struttura        Nessuna          Tabella (righe e   Gerarchica (oggetti e
+                                      colonne)           array annidati)
+    Tipi di dato     Solo stringhe    Solo stringhe      Stringhe, numeri,
+                                                         booleani, null, liste,
+                                                         oggetti
+    Modulo Python    Nessuno          csv                json
+    Lettura          read(), for      csv.reader         json.load
+    Scrittura        write()          csv.writer         json.dump
+    Uso tipico       Testo libero,    Dati tabellari,    Configurazioni, API,
+                     log              fogli di calcolo   dati complessi
+
+
+14. RIEPILOGO
+--------------------------------------------------------------------------------
+- JSON è un formato di testo per dati strutturati, basato su oggetti { } e
+  array [ ].
+- Chiavi e stringhe richiedono sempre i doppi apici; vietati commenti e virgola
+  finale.
+- Il modulo json (import json) fa parte della libreria standard.
+- dict diventa oggetto, list diventa array, True/False/None diventano
+  true/false/null.
+- json.dump() scrive su file, json.load() legge da file; dumps() e loads()
+  lavorano con le stringhe.
+- indent=4 rende il file leggibile; ensure_ascii=False conserva gli accenti.
+- Per modificare un file JSON: leggere, modificare in memoria, riscrivere.
+- Diversamente dal CSV, i tipi numerici vengono mantenuti alla lettura.
+
+================================================================================

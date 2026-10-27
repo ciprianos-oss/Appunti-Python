@@ -1,0 +1,23 @@
+Le informazioni possono essere passate alle funzione come parametri
+della funzione e devono essere specificati all'interno delle parentesi della funzione separati
+con una virgola.
+
+Per le funzioni:
+    - Il parametro ---> Variabile elencata tra le parentesi;
+    - L'argomento  ---> Valore effettivo passato alla funzione richiamata
+
+NUMERO DI ARGOMENTI:
+    Per impostazione predefinita, una funzione deve essere chiamata col numero corretto di
+    argomenti con cui è stata definita e se si richiama con un numero errato di argomenti,
+    verrà visualizzato un errore.
+    Ad esempio, se una funzione prevede 2 argomenti, bisogna richiamarla con esattamente 2
+    argomenti.
+
+    Per le funzioni è possibile assegnare valori predefiniti ai parametri e se la funzione viene
+    chiamata senza argomenti, verrà usato il valore predefinito all'interno della funzione.
+    ES.:
+        def saluto(nome = "Carlo"):
+            print("Ciao ", nome)
+
+        saluto("Luca") # Verrà visualizzato "Ciao Luca"
+        saluto() # Verrà visualizzato "Ciao Carlo"

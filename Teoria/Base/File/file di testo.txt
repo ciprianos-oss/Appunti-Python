@@ -1,0 +1,187 @@
+================================================================================
+FILE DI TESTO IN PYTHON
+================================================================================
+
+
+1. INTRODUZIONE
+--------------------------------------------------------------------------------
+Un file di testo è un file che contiene una sequenza di caratteri leggibili
+(lettere, numeri, simboli, a capo) memorizzati in modo persistente su disco.
+A differenza delle variabili, che esistono solo mentre il programma è in
+esecuzione, i dati salvati in un file permangono anche dopo la chiusura del
+programma e possono essere riletti in un secondo momento.
+
+Il file di testo è il modo più semplice per rendere i dati persistenti. Esempi
+tipici: file di log, file di configurazione, file .txt, .csv, .json.
+
+
+2. LE TRE FASI DI LAVORO CON UN FILE
+--------------------------------------------------------------------------------
+Qualsiasi operazione su un file segue sempre lo stesso schema:
+
+    1. APERTURA   -> si collega il programma al file
+    2. OPERAZIONE -> si legge o si scrive il contenuto
+    3. CHIUSURA   -> si libera il file e si salvano definitivamente i dati
+
+Dimenticare la chiusura può causare perdita di dati (il contenuto potrebbe
+restare nel buffer di memoria e non essere scritto su disco) e blocco del file.
+
+
+3. LA FUNZIONE open()
+--------------------------------------------------------------------------------
+Sintassi:
+
+    open(nome_file, modalità)
+
+- nome_file : percorso del file (relativo o assoluto), sotto forma di stringa.
+- modalità  : indica come si vuole usare il file.
+
+Modalità principali:
+
+    "r"   Read (lettura). Predefinita. Errore se il file non esiste.
+    "w"   Write (scrittura). Crea il file se non esiste; se esiste, ne
+          CANCELLA il contenuto precedente.
+    "a"   Append (aggiunta). Scrive in fondo al file senza cancellare nulla;
+          crea il file se non esiste.
+    "r+"  Lettura e scrittura. Errore se il file non esiste.
+
+Attenzione: la modalità "w" sovrascrive il file senza chiedere conferma.
+
+
+4. IL COSTRUTTO with
+--------------------------------------------------------------------------------
+Il metodo consigliato per aprire un file è l'istruzione with:
+
+    with open("temp.txt", "w") as mio_file:
+        ...
+
+Vantaggi:
+- il file viene chiuso AUTOMATICAMENTE al termine del blocco, anche in caso di
+  errore (non serve chiamare close());
+- il file resta aperto solo finché si opera all'interno del blocco indentato;
+- il codice è più pulito e sicuro.
+
+Alternativa senza with (sconsigliata, perché richiede la chiusura manuale):
+
+    mio_file = open("temp.txt", "w")
+    mio_file.write("testo")
+    mio_file.close()
+
+
+5. SCRITTURA SU FILE
+--------------------------------------------------------------------------------
+Metodo principale: write()
+
+    mio_file.write(stringa)
+
+Punti importanti:
+- write() accetta SOLO stringhe: i numeri vanno convertiti con str().
+- write() NON va a capo automaticamente: bisogna aggiungere "\n" per scrivere
+  un dato per riga.
+- restituisce il numero di caratteri scritti.
+
+Altro metodo: writelines(lista_di_stringhe), che scrive tutte le stringhe di
+una lista (anche qui il "\n" va aggiunto manualmente).
+
+
+6. LETTURA DA FILE
+--------------------------------------------------------------------------------
+Metodi disponibili:
+
+    read()        Legge l'intero contenuto e lo restituisce come unica stringa.
+    readline()    Legge una sola riga (compreso il "\n" finale).
+    readlines()   Legge tutte le righe e le restituisce come lista di stringhe.
+
+È inoltre possibile scorrere il file direttamente con un ciclo for, leggendo
+una riga alla volta (soluzione efficiente anche per file molto grandi):
+
+    with open("temp.txt", "r") as f:
+        for riga in f:
+            print(riga.strip())
+
+Il metodo strip() elimina gli spazi e il carattere "\n" a inizio e fine riga.
+
+
+7. ESEMPIO COMPLETO
+--------------------------------------------------------------------------------
+Traccia: scrivere un programma che legga 5 temperature, le salvi in un file
+temp.txt una per riga e successivamente legga le temperature registrate.
+
+    # Scrittura
+    with open("temp.txt", "w") as mio_file:
+        for _ in range(5):
+            temp = input("Inserisci una temperatura: ")
+            mio_file.write(temp + "\n")
+
+    # Lettura
+    with open("temp.txt", "r") as mio_file:
+        print(mio_file.read())
+
+Analisi del codice:
+- "w" crea temp.txt (o lo svuota se esiste già);
+- il ciclo for ripete 5 volte l'inserimento; la variabile "_" indica che il
+  contatore non viene utilizzato;
+- input() restituisce sempre una STRINGA, quindi si può scrivere direttamente
+  con write() senza conversione;
+- "\n" garantisce una temperatura per riga;
+- all'uscita dal primo with il file viene chiuso e i dati sono salvati;
+- il secondo with riapre il file in lettura ("r") e read() restituisce tutto
+  il contenuto, che print() mostra a schermo.
+
+Contenuto di temp.txt dopo l'esecuzione (esempio):
+
+    18
+    21.5
+    19
+    23
+    20
+
+
+8. ERRORI COMUNI
+--------------------------------------------------------------------------------
+- Usare "w" al posto di "a" e perdere i dati già presenti nel file.
+- Dimenticare "\n" in scrittura: tutti i valori finiscono sulla stessa riga.
+- Provare a scrivere un numero con write() senza str(): genera TypeError.
+- Aprire in lettura un file inesistente: genera FileNotFoundError.
+- Dimenticare close() quando non si usa with.
+- Dimenticare che i valori letti sono stringhe: per fare calcoli vanno
+  convertiti con int() o float().
+
+
+9. GESTIONE DEGLI ERRORI
+--------------------------------------------------------------------------------
+Per evitare che il programma si interrompa se il file non esiste, si può
+usare try/except:
+
+    try:
+        with open("temp.txt", "r") as f:
+            print(f.read())
+    except FileNotFoundError:
+        print("Il file non esiste.")
+
+
+10. ESTENSIONE: LETTURA E CONVERSIONE IN NUMERI
+--------------------------------------------------------------------------------
+Per elaborare le temperature (ad esempio calcolarne la media) occorre
+convertire le righe lette in numeri:
+
+    with open("temp.txt", "r") as f:
+        temperature = [float(riga) for riga in f]
+
+    media = sum(temperature) / len(temperature)
+    print("Temperatura media:", media)
+
+float() ignora automaticamente gli spazi e il "\n" a inizio e fine stringa.
+
+
+11. RIEPILOGO
+--------------------------------------------------------------------------------
+- Un file di testo rende i dati persistenti.
+- Schema: apertura -> operazione -> chiusura.
+- open(nome, modalità): "r" lettura, "w" scrittura, "a" aggiunta.
+- with chiude il file automaticamente: è la forma da preferire.
+- write() scrive solo stringhe e non va a capo da solo.
+- read(), readline(), readlines() e il ciclo for permettono la lettura.
+- I dati letti da file sono stringhe: vanno convertiti se servono numeri.
+
+================================================================================

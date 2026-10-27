@@ -1,0 +1,26 @@
+Le liste vengono utilizzate per memorizzare più elementi in una singola variabile
+e sono uno dei 4 tipi di dati predefiniti per memorizzare collezioni di dati.
+
+Per definire una lista la sintassi è:
+    nome_lista = []
+
+Gli elementi della lista sono ordinati, modificabili e consentono valori duplicati, ovvero stessi
+valori inseriti piu di una volta.
+Inoltre si intende che le liste sono ordinate perchè hanno un ordine definito e che non cambierà e
+che eventuali elementi aggiunti, verranno inseriti in fondo alla lista.
+
+Le liste dispongono dei seguenti metodi integrati:
+    - append() ---> Aggiunge un elemento a fine lista
+    - clear()  ---> Rimuove tutti gli elementi della lista
+    - count()  ---> Ritorna il numero di elementi dell valore specificato
+    - remove() ---> Rimuove il valore specificato
+    - sort()   ---> Ordina la lista
+
+Per poter accedere agli elementi della lista, la sintassi è:
+    nome_lista[i] ---> Dove la i indica l'indice della lista a cui accedere
+
+In python le liste vengono usate per i seguenti motivi:
+    - Quando l'ordine degli elementi è importante(ES. classifica di punteggio);
+    - Quando i dati devono essere modificabili;
+    - Quando si devono memorizzare elementi dello stesso tipo;
+    - Quando si devono scorrere iterativamente i dati(cioe ciclare frequentemente i dati)

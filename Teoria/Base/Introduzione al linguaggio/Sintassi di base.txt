@@ -1,0 +1,70 @@
+La sintassi di base del linguaggio è molto semplice:
+    - Commenti:
+        I commenti sono sezioni di programma ignorati dall'interprete e servono
+        per descrivere un determinato pezzo di codice o altro.
+
+        Esistono 2 tipi di commento, ovvero:
+            - Commento di linea ---> Serve per spiegare ad esempio cosa fa un determinato ciclo
+            - Commento multilinea ---> Serve per spiegare ad esempio una funzione in modo completo
+
+        Il commento di linea viene definito col carattere #,
+        mentre il multi linea con ''' '''.
+
+    - Dichiarazione delle variabili:
+        Per dichiarare una variabile è molto semplice, perchè il tipo della
+        variabile viene assegnato automaticamente dal compilatore in base al
+        valore che viene inserito
+
+        La dichiarazione segue la seguente sintassi:
+            variable_name = value
+
+    - Operazioni I/O:
+        Questo tipo di operazioni servono per stampare un valore oppure chiedere
+        all'utente di inserire un valore.
+
+        Per stampare un qualcosa, si utilizza la funzione print(), mentre per l'input
+        si utilizza la funzione input()
+
+        La sintassi di base per l'input è la seguente
+            variable_name = input(" ")
+
+        NOTA BENE:
+            la funzione input ritorna una stringa, quindi se si deve prendere in input un
+            numero, si deve fare il casting di tipo:
+                - int(input()) ---> Per i numeri interi
+                - float(input()) ---> Per i numeri con la virgola
+
+    - Blocchi di controllo:
+        I blocchi di controllo permettono di verificare se una determinata condizione
+        e vera o falsa.
+
+        La sintassi di base è la seguente:
+            if variabile_da_controllare == valore
+        Gli operatori logici sono i seguenti:
+            - == ---> Controllo dell'uguaglianza
+            - != ---> Controllo della diversità
+            - >, <, >=, <= ---> Maggiore, minore, maggiore o uguale, minore o uguale
+
+    - Cicli:
+        I cicli servono per eseguire determinate istruzioni N volte ed esistono 2
+        tipi di cicli, ovvero:
+            - for ---> Eseguire le istruzioni per un numero finito di volte;
+            - while ---> Eseguire le istruzioni fino a quando la condizione è vera
+
+        La sintassi dei cicli è la seguente:
+            - for i in range(n): ---> n sta per il numero di volte che si deve fare il ciclo
+                                      mentre la i e l'iteratore(se la variabile i non deve essere
+                                      usata nel ciclo, si puo sostituire con il carattere _)
+
+            - while condizione:
+                istruzioni da eseguire
+
+    - Operatori matematici:
+        In Python, ci sono vari operatori matematici da poter utilizzare quando si fanno
+        operazioni matematiche, e sono:
+            - += ---> Somma
+            - -= ---> Sottrazione
+            - *= ---> Moltiplicazione
+            - /= ---> Divisione
+            - %= ---> Modulo
+            - **= ---> Elevamento a potenza

@@ -1,0 +1,20 @@
+I dizionari vengono usati per memorizzare valori dei dati in coppie chiave-valore,
+è una collezione ordinata, modificabile e che non ammette duplicati.
+Per dizionario ordinato si intende che le voci hanno un ordine definito in fase di dichiarazione
+che tale ordine non cambierà.
+
+Per definire un dizionario, si usa la seguente sintassi:
+    nome_dizionario = {
+        "chiave": valore,
+        "chiave": valore
+    }
+
+    Il valore puo essere qualsiasi tipo di dato di python
+
+Per poter accedere alle voci del dizionario, si possono richiamare tramite il nome della chiave:
+    nome_dizionario["chiave"]
+Inoltre per determinare il numero di elementi presenti nel dizionario, la sintassi è:
+    len(nome_dizionario)
+
+I dizionari vengono associati ad una determinata chiave il suo corrispettivo valore, ad esempio
+nome e cognome ecc.

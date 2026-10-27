@@ -1,0 +1,19 @@
+Python è un linguaggio di programmazione molto diffuso. È stato creato da Guido van Rossum e rilasciato nel 1991 e
+viene utilizzato per:
+    - Sviluppo web (lato server);
+    - Sviluppo software;
+    - Matematica;
+    - Scripting di sistema.
+
+Come mai si utilizza python?
+    - Python si utilizza per i seguenti motivi:
+    - Python può essere utilizzato su un server per creare applicazioni web.
+    - Python può essere utilizzato insieme a software per creare flussi di lavoro.
+    - Python è in grado di connettersi a sistemi di database. Può anche leggere e modificare file.
+    - Python può essere utilizzato per gestire grandi quantità di dati ed eseguire calcoli matematici complessi.
+    - Python può essere utilizzato per la prototipazione rapida o per lo sviluppo di software pronto per la produzione.
+
+La sintassi del python è molto facile da capire ed imparare per i seguenti motivi:
+    - Python è stato progettato per essere leggibile e presenta alcune somiglianze con la lingua inglese, con influenze dalla matematica.
+    - Python utilizza le interruzioni di riga per completare un comando, a differenza di altri linguaggi di programmazione che spesso utilizzano punti e virgola o parentesi.
+    - Python si basa sull'indentazione, utilizzando gli spazi bianchi, per definire l'ambito di un elemento, come ad esempio l'ambito di cicli, funzioni e classi. Altri linguaggi di programmazione spesso utilizzano le parentesi graffe a questo scopo.

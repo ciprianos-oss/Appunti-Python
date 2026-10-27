@@ -1,0 +1,23 @@
+Il blocco try...except permette di testare un blocco di codice per individuare degli errori
+senza bloccare l'esecuzione del programma.
+
+La sintassi è la seguente:
+    try:
+        blocco di codice da eseguire
+    except:
+        blocco di codice da eseguire quando si verifica un errore
+        nel blocco try
+    else:
+        blocco di codice da eseguire se non vengono rilevati errori
+    finally:
+        blocco eseguito indipendentemente dal fatto che il blocco try
+        generi un errore o meno
+
+In una determinata condizione, si può sollevare un'eccezione tramite l'istruzione raise:
+    x = -1
+    if x < 0:
+        raise Exception("Nessun numero minore di 0")
+
+    y = "Ciao"
+    if not type(x) is int:
+        raise TypeError("Solamente int ammessi")

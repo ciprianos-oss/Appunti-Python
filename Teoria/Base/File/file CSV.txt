@@ -1,0 +1,267 @@
+================================================================================
+FILE CSV IN PYTHON
+================================================================================
+
+
+1. INTRODUZIONE
+--------------------------------------------------------------------------------
+CSV è l'acronimo di Comma-Separated Values (valori separati da virgola). Si
+tratta di un formato di file di testo usato per memorizzare dati in forma
+tabellare: ogni riga del file corrisponde a una riga della tabella e i valori
+di ciascuna colonna sono separati da un carattere delimitatore, di norma la
+virgola.
+
+Esempio di contenuto di un file CSV:
+
+    nome,cognome,eta,media
+    Salvatore,Cipriano,18,6.5
+
+La prima riga contiene spesso l'intestazione (header), cioè i nomi delle
+colonne; le righe successive contengono i dati (record).
+
+Il formato CSV è molto diffuso perché è semplice, leggibile da un qualsiasi
+editor di testo e importabile/esportabile da fogli di calcolo (Excel, LibreOffice
+Calc, Google Sheets) e da database.
+
+
+2. PERCHÉ USARE IL MODULO csv
+--------------------------------------------------------------------------------
+Un file CSV è un file di testo e potrebbe essere gestito con le normali
+funzioni read() e write(). Tuttavia, farlo manualmente è rischioso: se un valore
+contiene una virgola (ad esempio "Rossi, Mario") o un a capo, il file risulta
+corrotto e la lettura produce colonne sbagliate.
+
+Il modulo csv della libreria standard di Python risolve il problema: si occupa
+automaticamente di separare i campi, di inserire le virgolette quando servono
+(quoting) e di gestire i caratteri speciali.
+
+Il modulo si importa con:
+
+    import csv
+
+Non serve installare nulla: fa parte della libreria standard.
+
+
+3. APERTURA DEL FILE
+--------------------------------------------------------------------------------
+Il file CSV si apre con la funzione open(), come qualsiasi file di testo,
+preferibilmente con il costrutto with (chiusura automatica del file):
+
+    with open("stud.csv", "w", newline="") as mioCSV:
+
+Modalità principali:
+
+    "r"   lettura
+    "w"   scrittura (cancella il contenuto precedente)
+    "a"   aggiunta in fondo al file
+
+IL PARAMETRO newline=""
+Nei file aperti per la scrittura si deve sempre specificare newline="". Il modulo
+csv gestisce da solo i caratteri di fine riga; senza questo parametro, su alcuni
+sistemi (in particolare Windows) compaiono righe vuote tra un record e l'altro.
+È buona norma indicarlo anche in lettura.
+
+
+4. SCRITTURA: csv.writer
+--------------------------------------------------------------------------------
+Si crea un oggetto "scrittore" collegato al file:
+
+    mioScrittore = csv.writer(mioCSV)
+
+Metodi principali:
+
+    writerow(lista)      Scrive UNA riga a partire da una lista (o tupla).
+    writerows(lista)     Scrive PIÙ righe a partire da una lista di liste.
+
+Ogni elemento della lista diventa una colonna. I valori non stringa (int, float)
+vengono convertiti automaticamente in testo: non serve usare str().
+
+Esempio:
+
+    mioScrittore.writerow(["nome", "cognome", "eta", "media"])
+    mioScrittore.writerow(["Salvatore", "Cipriano", 18, 6.5])
+
+
+5. LETTURA: csv.reader
+--------------------------------------------------------------------------------
+Si crea un oggetto "lettore" collegato al file:
+
+    mioLettore = csv.reader(mioCSV)
+
+Il lettore è un iteratore: scorrendolo con un ciclo for restituisce una riga alla
+volta, sotto forma di LISTA DI STRINGHE.
+
+    for riga in mioLettore:
+        print(riga)
+
+Output:
+
+    ['nome', 'cognome', 'eta', 'media']
+    ['Salvatore', 'Cipriano', '18', '6.5']
+
+ATTENZIONE: tutti i valori letti sono STRINGHE, anche i numeri ('18' e '6.5',
+non 18 e 6.5). Per eseguire calcoli bisogna convertirli con int() o float().
+
+Si accede ai singoli campi tramite indice:
+
+    riga[0]    -> nome
+    riga[3]    -> media
+
+La lettura può avvenire una sola volta: una volta terminato il ciclo, il lettore
+è esaurito e per rileggere bisogna riaprire il file.
+
+
+6. ESEMPIO COMPLETO
+--------------------------------------------------------------------------------
+    import csv
+
+    # Scrittura del file csv
+    with open("stud.csv", "w", newline="") as mioCSV:
+        mioScrittore = csv.writer(mioCSV)
+        mioScrittore.writerow(["nome", "cognome", "eta", "media"])
+        mioScrittore.writerow(["Salvatore", "Cipriano", 18, 6.5])
+
+    # Lettura del file csv
+    with open("stud.csv", "r") as mioCSV:
+        mioLettore = csv.reader(mioCSV)
+
+        for riga in mioLettore:
+            print(riga)
+
+Analisi del codice:
+- import csv rende disponibili le funzioni del modulo;
+- il primo with apre stud.csv in scrittura ("w"); newline="" evita righe vuote;
+- csv.writer() crea lo scrittore collegato al file;
+- la prima writerow() scrive l'intestazione, la seconda un record di dati;
+- all'uscita dal primo with il file viene chiuso e i dati sono salvati;
+- il secondo with riapre il file in lettura ("r");
+- csv.reader() crea il lettore e il ciclo for stampa ogni riga come lista.
+
+Contenuto di stud.csv dopo l'esecuzione:
+
+    nome,cognome,eta,media
+    Salvatore,Cipriano,18,6.5
+
+
+7. SCRITTURA DI PIÙ RIGHE CON writerows()
+--------------------------------------------------------------------------------
+Quando i dati sono già raccolti in una lista di liste, si può scrivere tutto in
+una sola chiamata:
+
+    studenti = [
+        ["Salvatore", "Cipriano", 18, 6.5],
+        ["Mario", "Rossi", 17, 7.2],
+        ["Anna", "Bianchi", 18, 8.0],
+    ]
+
+    with open("stud.csv", "a", newline="") as mioCSV:
+        mioScrittore = csv.writer(mioCSV)
+        mioScrittore.writerows(studenti)
+
+In questo esempio è stata usata la modalità "a" per aggiungere i record in fondo
+al file senza cancellare quelli già presenti.
+
+
+8. LETTURA E SALTO DELL'INTESTAZIONE
+--------------------------------------------------------------------------------
+Per elaborare solo i dati, senza la riga di intestazione, si usa la funzione
+next(), che consuma la prima riga del lettore:
+
+    with open("stud.csv", "r") as mioCSV:
+        mioLettore = csv.reader(mioCSV)
+        next(mioLettore)               # salta l'intestazione
+
+        for riga in mioLettore:
+            media = float(riga[3])     # conversione da stringa a numero
+            print(riga[0], riga[1], media)
+
+
+9. DICTWRITER E DICTREADER
+--------------------------------------------------------------------------------
+Il modulo offre due classi che lavorano con i dizionari anziché con le liste,
+rendendo il codice più leggibile perché si accede ai campi per NOME e non per
+indice.
+
+csv.DictWriter: scrive dizionari.
+
+    campi = ["nome", "cognome", "eta", "media"]
+
+    with open("stud.csv", "w", newline="") as mioCSV:
+        scrittore = csv.DictWriter(mioCSV, fieldnames=campi)
+        scrittore.writeheader()        # scrive l'intestazione
+        scrittore.writerow({"nome": "Salvatore", "cognome": "Cipriano",
+                            "eta": 18, "media": 6.5})
+
+csv.DictReader: legge ogni riga come dizionario, usando la prima riga del file
+come chiavi (l'intestazione non va quindi saltata manualmente).
+
+    with open("stud.csv", "r", newline="") as mioCSV:
+        lettore = csv.DictReader(mioCSV)
+        for riga in lettore:
+            print(riga["nome"], riga["media"])
+
+
+10. IL DELIMITATORE
+--------------------------------------------------------------------------------
+Il separatore predefinito è la virgola, ma non tutti i programmi lo usano. In
+molte versioni italiane di Excel, ad esempio, il separatore è il punto e virgola
+(;), perché la virgola è usata come separatore decimale.
+
+Il delimitatore si specifica con il parametro delimiter:
+
+    csv.writer(mioCSV, delimiter=";")
+    csv.reader(mioCSV, delimiter=";")
+
+Altri delimitatori comuni: tabulazione ("\t"), barra verticale ("|").
+
+
+11. GESTIONE DEGLI ERRORI
+--------------------------------------------------------------------------------
+Se il file non esiste, l'apertura in lettura genera FileNotFoundError. Si può
+gestire con try/except:
+
+    try:
+        with open("stud.csv", "r", newline="") as mioCSV:
+            for riga in csv.reader(mioCSV):
+                print(riga)
+    except FileNotFoundError:
+        print("Il file non esiste.")
+
+
+12. ERRORI COMUNI
+--------------------------------------------------------------------------------
+- Dimenticare newline="" in scrittura: compaiono righe vuote tra i record.
+- Usare "w" al posto di "a" e perdere i dati già presenti nel file.
+- Dimenticare che i valori letti sono stringhe: '6.5' + '7' non è una somma.
+- Scrivere con writerow() un valore singolo anziché una lista: una stringa viene
+  scomposta carattere per carattere (writerow("ciao") produce c,i,a,o).
+- Scrivere l'intestazione più volte aprendo il file in modalità "a".
+- Provare a rileggere con lo stesso lettore dopo averlo già scorso interamente.
+- Usare un delimitatore diverso da quello con cui il file è stato scritto.
+
+
+13. DIFFERENZE TRA FILE DI TESTO E FILE CSV
+--------------------------------------------------------------------------------
+    File di testo (.txt)           File CSV (.csv)
+    ------------------------------ ------------------------------------------
+    Testo libero, senza struttura  Dati tabellari: righe e colonne
+    Si usa read() e write()        Si usano csv.reader e csv.writer
+    Una riga = una stringa         Una riga = lista di campi
+    Nessun delimitatore            Campi separati da un delimitatore
+
+
+14. RIEPILOGO
+--------------------------------------------------------------------------------
+- Il CSV è un file di testo che rappresenta una tabella; i campi sono separati
+  da un delimitatore (di norma la virgola).
+- Il modulo csv (import csv) gestisce separatori, virgolette e caratteri speciali.
+- Aprire il file con with open(...) e, in scrittura, con newline="".
+- csv.writer: writerow() scrive una riga, writerows() ne scrive più di una.
+- csv.reader: scorrendolo con un for restituisce ogni riga come lista di stringhe.
+- I valori letti sono sempre stringhe: convertirli con int() o float() se
+  servono numeri.
+- DictWriter e DictReader permettono di lavorare con i dizionari accedendo ai
+  campi per nome.
+- Il delimitatore si modifica con il parametro delimiter.
+
+================================================================================

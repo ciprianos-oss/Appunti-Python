@@ -1,0 +1,11 @@
+Sulle stringhe si possono effettuare varie operazioni, ovvero:
+    - len()                       ---> Restituisce la lunghezza della stringa
+    - stringa[n]                  ---> Si accede ad una determinata posizione della stringa
+    - stringa.upper()             ---> Viene restituita l'intera stringa in maiuscolo
+    - stringa.lower()             ---> Viene restituita l'intera stringa in minuscolo
+    - stringa.count('')           ---> Ritorna quante volte c'è un determinato carattere nella stringa
+    - stringa.replace("c1", "c2") ---> Mette il carattere c2 al posto del carattere c1
+
+Inoltre, quando si vogliono concatenare 2 stringhe diverse si usa la seguente sintassi:
+    - stringa 1 + stringa 2       ---> Se non si vuole lo spazio tra le stringhe;
+    - stringa 1 + ' ' + stringa 2 ---> Se si vuole lo spazio tra le stringhe;

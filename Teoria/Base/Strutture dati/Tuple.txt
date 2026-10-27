@@ -1,0 +1,18 @@
+Le tuple vengono utilizzate per memorizzare più elementi in una singola variabile
+ed è una collezione ordinata e immutabile, il che significa che non si puo aggiungere o rimuovere
+nessun elemento dopo la creazione della tupla.
+
+Per dichiarare una tupla, la sintassi è la seguente:
+    nome_tupla = (elementi)
+Inoltre gli elementi vanno inseriti nella tupla in fase di dichiarazione di tale struttura dati.
+
+Poiché sono indicizzate, le tuple possono contenere valori elementi duplicati e per accedere
+ai valori della tupla la sintassi è:
+    nome_tupla[i] ---> Dove i indica l'indice della tupla a cui accedere
+
+Le funzioni che si possono usare sulle tuple sono:
+    - len(nome_tupla)  ---> Restituisce il numero di elementi contenuti nella tupla;
+    - type(nome_tupla) ---> Restituisce il tipo 'tuple'
+
+Le tuple vengono utilizzate quando i dati non devono MAI cambiare e si vogliono proteggere
+da modifiche accidentali.

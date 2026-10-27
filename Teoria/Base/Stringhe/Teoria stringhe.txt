@@ -1,0 +1,19 @@
+Le stringhe sono la concatenazione di varie lettere e possono essere racchiuse tra:
+    - ' ';
+    - " "
+
+Le stringhe possono essere visualizzate tramite la funzione print() e al loro
+interno possono contenere delle citazioni:
+    - "testo con 'citazione'";
+    - 'testo con "citazione"'
+
+L'assegnazione delle stringhe in una variabile può essere fatta in 2 modi differenti, ovvero:
+    - In dichiarazione:
+        a = "Stringa"
+    - Input dell'utente
+        a = input("Inserisci una stringa: ")
+
+    Inoltre si puo assegnare un testo in una variabile nella seguente maniera
+        a = """ Testo
+                multi
+                linea"""

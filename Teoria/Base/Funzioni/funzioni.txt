@@ -1,0 +1,19 @@
+Una funzione è un blocco di codice che viene eseguito solamente quando viene richiamato,
+può restituire dati come risultato e servono per evitare la ripetizione del codice.
+
+Per poter creare una funzione in python, la sintassi è:
+    def nome_funzione():
+        istruzioni
+Per poter richiamare la funzione, si scrive il nome della funzione da richiamare con le
+parentesi tonde e si può chiamare la stessa funzione n volte.
+
+Per poter inviare dati al codice che ha invocato le funzioni, si utilizza l'operatore return,
+che interrompe l'esecuzione e restituisce il risultato
+ES:
+    def saluto():
+        return "Ciao mondo"
+
+    messaggio = saluto()
+
+Per poter definire la struttura del progetto senza integrare subito le funzioni, si puo usare
+l'operatore pass, perchè le funzioni non possono essere vuote.
