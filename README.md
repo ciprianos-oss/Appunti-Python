@@ -71,7 +71,7 @@ Gli ambienti di sviluppo consigliati sono Visual Studio Code e JetBrains PyCharm
 ## 🚀 Come usare la repository
 Per sfruttare al meglio questa repository, è consigliabile partire **sempre**
 dalla teoria prima di guardare il codice. La roadmap consigliata è la seguente:
-1. Introduzione 18_09_2026;
+1. Introduzione al linguaggio;
 2. Stringhe;
 3. Strutture dati;
 4. Funzioni;
