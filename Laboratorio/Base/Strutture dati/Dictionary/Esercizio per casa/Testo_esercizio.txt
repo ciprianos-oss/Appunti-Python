@@ -1,0 +1,25 @@
+Per l'esercizio creare i seguenti file:
+    Function_ex.py
+    main_ex.py
+
+Magazzino di un negozio:
+
+    Un negozio vuole memorizzare la quantità disponibile di alcuni prodotti.
+    Creare un dizionario simile al seguente:
+
+        magazzino = {
+            "mouse": 12,
+            "tastiera": 7,
+            "monitor": 5,
+            "cuffie": 9
+        }
+
+    Il programma deve chiedere all'utente il nome di un prodotto e:
+        - Se il prodotto esiste, visualizzare quanti pezzi sono disponibili;
+        - Se non esiste, visualizzare "Prodotto non presente";
+        - Chiedere successivamente quanti pezzi vengono venduti;
+        - Sottrarre la quantità venduta dal magazzino;
+        - visualizzare alla fine il contenuto aggiornato del magazzino;
+
+    Come estensione:
+        Si può chiedere che non sia possibile vendere più pezzi di quelli disponibili

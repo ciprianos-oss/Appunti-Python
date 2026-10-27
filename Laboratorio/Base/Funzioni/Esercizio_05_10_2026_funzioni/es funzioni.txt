@@ -1,0 +1,24 @@
+ESERCIZIO 4 – Analisi di una lista di voti
+Scrivere un programma Python che utilizzi una lista di voti e alcune funzioni.
+
+Creare una lista simile alla seguente:
+    voti = [7, 5, 8, 6, 7]
+
+Scrivere una funzione:
+    calcola_media(voti)
+che:
+    riceva come parametro una lista di voti;
+    calcoli la media;
+    restituisca il valore della media.
+
+Scrivere poi una seconda funzione:
+    esito(media)
+che:
+    riceva come parametro la media;
+    restituisca "Promosso" se la media è maggiore o uguale a 6;
+    restituisca "Non promosso" se la media è inferiore a 6.
+
+Il programma principale deve utilizzare entrambe le funzioni e produrre un risultato simile al seguente:
+    Voti: [7, 5, 8, 6, 7]
+    Media: 6.6
+    Esito: Promosso

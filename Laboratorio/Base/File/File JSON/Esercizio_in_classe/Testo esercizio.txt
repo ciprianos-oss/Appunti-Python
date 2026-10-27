@@ -1,0 +1,26 @@
+Avete a disposizione il seguente file json:
+
+[
+    {
+        "titolo": "1984",
+        "autore": "George Orwell",
+        "anno": 1949
+    },
+    {
+        "titolo": "Il nome della rosa",
+        "autore": "Umberto Eco",
+        "anno": 1980
+    },
+    {
+        "titolo": "Lo Hobbit",
+        "autore": "J.R.R. Tolkien",
+        "anno": 1937
+    }
+]
+Scrivere un programma Python che legga il file e:
+    - Visualizzi titolo e autore di tutti i libri;
+    - Conti quanti libri sono presenti;
+
+Chieda all'utente un anno e:
+    - Visualizzi tutti i libri pubblicati dopo quell'anno;
+    - Chieda poi il titolo di un libro e dica se è presente nel catalogo.

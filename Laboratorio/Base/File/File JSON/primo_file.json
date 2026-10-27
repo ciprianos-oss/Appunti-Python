@@ -1,0 +1,11 @@
+{
+    "nome": "Giovanni",
+    "cognome": "Franco",
+    "eta": 40,
+
+    "indirizzo": {
+        "via": "Via Roma 21",
+        "citta": "Piacenza",
+        "stato": "Italia"
+    }
+}
