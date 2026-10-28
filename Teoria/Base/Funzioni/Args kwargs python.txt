@@ -1,0 +1,196 @@
+================================================================================
+*ARGS E **KWARGS IN PYTHON
+================================================================================
+
+
+1. INTRODUZIONE
+--------------------------------------------------------------------------------
+
+Normalmente una funzione deve essere chiamata con il numero esatto di
+argomenti previsto dalla sua definizione. Quando pero' non si sa in anticipo
+quanti argomenti verranno passati, si usano gli argomenti a numero variabile:
+
+    *args       per un numero variabile di argomenti posizionali
+    **kwargs    per un numero variabile di argomenti con nome
+
+I nomi args e kwargs sono solo una convenzione (arguments e keyword
+arguments): cio' che conta sono gli asterischi (* e **). Si potrebbero
+chiamare in un altro modo, ma e' buona norma mantenere i nomi standard.
+
+
+2. *ARGS (ARGOMENTI POSIZIONALI VARIABILI)
+--------------------------------------------------------------------------------
+
+Un parametro preceduto da un asterisco raccoglie tutti gli argomenti
+posizionali in eccesso e li memorizza in una TUPLA.
+
+Sintassi:
+
+    def nome_funzione(*args):
+        istruzioni
+
+Esempio:
+
+    def somma(*args):
+        totale = 0
+        for numero in args:
+            totale += numero
+        return totale
+
+    print(somma(1, 2))              # 3
+    print(somma(1, 2, 3, 4, 5))     # 15
+    print(somma())                  # 0
+
+All'interno della funzione args e' una normale tupla: si puo' usare len(args),
+scorrerla con un for, accedere con args[0] e cosi' via.
+
+    def mostra(*args):
+        print(type(args))           # <class 'tuple'>
+        print(len(args))
+        print(args[0])
+
+    mostra("a", "b", "c")
+
+
+3. **KWARGS (ARGOMENTI CON NOME VARIABILI)
+--------------------------------------------------------------------------------
+
+Un parametro preceduto da due asterischi raccoglie tutti gli argomenti con
+nome in eccesso e li memorizza in un DIZIONARIO: il nome dell'argomento
+diventa la chiave e il valore passato diventa il valore.
+
+Sintassi:
+
+    def nome_funzione(**kwargs):
+        istruzioni
+
+Esempio:
+
+    def scheda(**kwargs):
+        for chiave, valore in kwargs.items():
+            print(chiave, ":", valore)
+
+    scheda(nome="Mario", eta=17, classe="4A")
+
+    Output:
+        nome : Mario
+        eta : 17
+        classe : 4A
+
+All'interno della funzione kwargs e' un normale dizionario: si possono usare
+kwargs["nome"], kwargs.get("eta"), kwargs.items() e gli altri metodi.
+
+    def mostra(**kwargs):
+        print(type(kwargs))         # <class 'dict'>
+        print(kwargs.get("nome", "sconosciuto"))
+
+    mostra(nome="Anna")             # Anna
+    mostra(eta=30)                  # sconosciuto
+
+
+4. USARE *ARGS E **KWARGS INSIEME
+--------------------------------------------------------------------------------
+
+Si possono usare insieme, insieme ai parametri normali. L'ORDINE dei parametri
+nella definizione e' obbligatorio:
+
+    1. parametri normali (posizionali);
+    2. parametri con valore predefinito;
+    3. *args;
+    4. **kwargs.
+
+Esempio:
+
+    def funzione(a, b, *args, **kwargs):
+        print("a =", a)
+        print("b =", b)
+        print("args =", args)
+        print("kwargs =", kwargs)
+
+    funzione(1, 2, 3, 4, 5, nome="Mario", eta=17)
+
+    Output:
+        a = 1
+        b = 2
+        args = (3, 4, 5)
+        kwargs = {'nome': 'Mario', 'eta': 17}
+
+Gli argomenti posizionali vengono assegnati prima ai parametri normali; quelli
+rimanenti finiscono in args. Gli argomenti con nome che non corrispondono a
+nessun parametro finiscono in kwargs.
+
+ATTENZIONE: la definizione con **kwargs prima di *args, oppure con un
+parametro normale dopo **kwargs, genera un SyntaxError.
+
+
+5. UNPACKING NELLA CHIAMATA (* E ** AL MOMENTO DELLA CHIAMATA)
+--------------------------------------------------------------------------------
+
+Gli asterischi si possono usare anche quando si CHIAMA una funzione, per
+"spacchettare" una lista/tupla o un dizionario negli argomenti.
+
+    *   spacchetta una lista o una tupla in argomenti posizionali
+    **  spacchetta un dizionario in argomenti con nome
+
+    def presenta(nome, eta):
+        print(nome, "ha", eta, "anni")
+
+    dati = ["Mario", 17]
+    presenta(*dati)                 # equivale a presenta("Mario", 17)
+
+    persona = {"nome": "Anna", "eta": 16}
+    presenta(**persona)             # equivale a presenta(nome="Anna", eta=16)
+
+Le chiavi del dizionario devono coincidere con i nomi dei parametri.
+
+Spacchettare una lista in una funzione con *args:
+
+    numeri = [1, 2, 3, 4]
+    print(somma(*numeri))           # 10
+
+
+6. ESEMPIO PRATICO
+--------------------------------------------------------------------------------
+
+Funzione che calcola la media di quanti voti si vogliono e, se richiesto,
+stampa un messaggio con il nome dello studente:
+
+    def media(*voti, **info):
+        if len(voti) == 0:
+            return 0
+        risultato = sum(voti) / len(voti)
+        if "nome" in info:
+            print("Media di", info["nome"], ":", risultato)
+        return risultato
+
+    media(7, 8, 9)                  # restituisce 8.0
+    media(6, 7, nome="Mario")       # Media di Mario : 6.5
+
+
+7. QUANDO USARE *ARGS E **KWARGS
+--------------------------------------------------------------------------------
+
+  - *args: quando la funzione deve accettare un numero qualsiasi di valori
+    dello stesso tipo (come print(), che accetta quanti valori si vogliono, o
+    una somma di piu' numeri);
+  - **kwargs: quando la funzione deve accettare opzioni o dati facoltativi
+    con nome (impostazioni, campi di una scheda, ...);
+  - funzioni "wrapper" che inoltrano tutti i loro argomenti a un'altra
+    funzione, senza conoscerli in anticipo.
+
+Se il numero di argomenti e' noto e fisso, e' meglio usare parametri normali:
+la funzione risulta piu' chiara e gli errori vengono segnalati subito.
+
+
+8. RIEPILOGO
+--------------------------------------------------------------------------------
+
+    Sintassi         Tipo raccolto   Contenuto
+    --------------   -------------   -----------------------------------------
+    *args            tupla           argomenti posizionali in eccesso
+    **kwargs         dizionario      argomenti con nome in eccesso
+    f(*lista)        (chiamata)      spacchetta una lista/tupla in argomenti
+    f(**dizionario)  (chiamata)      spacchetta un dizionario in argomenti
+
+    Ordine nella definizione:
+        def f(normali, con_default=valore, *args, **kwargs)

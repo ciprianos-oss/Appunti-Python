@@ -46,7 +46,8 @@ Appunti Python/
 │   │   │   └── intro_stringhe.py                   
 │   │   ├── Strutture dati/                         
 │   │   │   ├── Dictionary/                         
-│   │   │   ├── List/                               
+│   │   │   ├── List/
+│   │   │   ├── Set/                               
 │   │   │   └── Tuple/                              
 │   │   └── try_except/                            
 │   │       ├── Esercizio/                          

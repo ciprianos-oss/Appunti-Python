@@ -1,26 +1,198 @@
-Le liste vengono utilizzate per memorizzare più elementi in una singola variabile
-e sono uno dei 4 tipi di dati predefiniti per memorizzare collezioni di dati.
+================================================================================
+LE LISTE IN PYTHON
+================================================================================
 
-Per definire una lista la sintassi è:
+
+1. DEFINIZIONE
+--------------------------------------------------------------------------------
+
+Le liste sono una struttura dati di Python utilizzata per memorizzare piu'
+elementi in una singola variabile. Sono uno dei 4 tipi di dato predefiniti di
+Python per memorizzare collezioni di dati (lista, tupla, set, dizionario).
+
+Una lista e' una collezione ordinata e modificabile, che ammette valori
+duplicati.
+
+Sintassi:
+
     nome_lista = []
 
-Gli elementi della lista sono ordinati, modificabili e consentono valori duplicati, ovvero stessi
-valori inseriti piu di una volta.
-Inoltre si intende che le liste sono ordinate perchè hanno un ordine definito e che non cambierà e
-che eventuali elementi aggiunti, verranno inseriti in fondo alla lista.
+Una lista si crea utilizzando le parentesi quadre.
 
-Le liste dispongono dei seguenti metodi integrati:
-    - append() ---> Aggiunge un elemento a fine lista
-    - clear()  ---> Rimuove tutti gli elementi della lista
-    - count()  ---> Ritorna il numero di elementi dell valore specificato
-    - remove() ---> Rimuove il valore specificato
-    - sort()   ---> Ordina la lista
+    frutta = ["mela", "banana", "ciliegia"]
+    print(frutta)    # ['mela', 'banana', 'ciliegia']
 
-Per poter accedere agli elementi della lista, la sintassi è:
-    nome_lista[i] ---> Dove la i indica l'indice della lista a cui accedere
 
-In python le liste vengono usate per i seguenti motivi:
-    - Quando l'ordine degli elementi è importante(ES. classifica di punteggio);
-    - Quando i dati devono essere modificabili;
-    - Quando si devono memorizzare elementi dello stesso tipo;
-    - Quando si devono scorrere iterativamente i dati(cioe ciclare frequentemente i dati)
+2. CARATTERISTICHE PRINCIPALI
+--------------------------------------------------------------------------------
+
+2.1 Ordinate
+    Gli elementi hanno un ordine definito che non cambia: ogni elemento ha una
+    posizione precisa (indice) e il primo elemento ha indice 0. Gli elementi
+    aggiunti con append() vengono inseriti in fondo alla lista.
+
+2.2 Modificabili
+    Dopo la creazione della lista e' possibile cambiare, aggiungere e rimuovere
+    elementi.
+
+    frutta[1] = "kiwi"
+    print(frutta)    # ['mela', 'kiwi', 'ciliegia']
+
+2.3 Con duplicati ammessi
+    Una lista puo' contenere piu' volte lo stesso valore, perche' ogni
+    elemento e' identificato dalla sua posizione.
+
+    voti = [7, 8, 7, 9, 7]
+    print(len(voti))    # 5
+
+2.4 Tipi di dato eterogenei
+    Una lista puo' contenere elementi di tipi diversi, anche altre liste.
+
+    misto = ["Mario", 17, True, 7.5]
+
+
+3. CREAZIONE DI UNA LISTA
+--------------------------------------------------------------------------------
+
+Con le parentesi quadre:
+
+    numeri = [1, 2, 3]
+
+Lista vuota (si riempie in seguito):
+
+    vuota = []
+
+Con il costruttore list():
+
+    lettere = list(("a", "b", "c"))    # da una tupla
+    cifre = list(range(5))             # [0, 1, 2, 3, 4]
+
+
+4. ACCESSO AGLI ELEMENTI
+--------------------------------------------------------------------------------
+
+Si accede agli elementi tramite l'indice, scritto tra parentesi quadre:
+
+    nome_lista[i]    # i = indice dell'elemento a cui accedere
+
+    colori = ["rosso", "verde", "blu", "giallo"]
+
+    print(colori[0])     # rosso (primo elemento)
+    print(colori[2])     # blu
+
+Indici negativi (si parte dalla fine):
+
+    print(colori[-1])    # giallo (ultimo elemento)
+
+Slicing (estrazione di una parte della lista, il risultato e' una lista):
+
+    print(colori[1:3])   # ['verde', 'blu']
+    print(colori[:2])    # ['rosso', 'verde']
+    print(colori[2:])    # ['blu', 'giallo']
+
+Accedere a un indice inesistente genera l'errore IndexError.
+
+
+5. METODI INTEGRATI
+--------------------------------------------------------------------------------
+
+Le liste dispongono dei seguenti metodi:
+
+    append(x)       Aggiunge l'elemento x a fine lista
+    insert(i, x)    Inserisce l'elemento x nella posizione i
+    extend(altra)   Aggiunge in fondo tutti gli elementi di un'altra lista
+    remove(x)       Rimuove la prima occorrenza del valore x
+    pop(i)          Rimuove e restituisce l'elemento in posizione i
+                    (senza argomento rimuove l'ultimo)
+    clear()         Rimuove tutti gli elementi della lista
+    count(x)        Restituisce quante volte il valore x compare nella lista
+    index(x)        Restituisce l'indice della prima occorrenza di x
+    sort()          Ordina la lista
+    reverse()       Inverte l'ordine degli elementi
+    copy()          Restituisce una copia della lista
+
+Esempi:
+
+    numeri = [3, 1, 2]
+
+    numeri.append(5)        # [3, 1, 2, 5]
+    numeri.insert(0, 9)     # [9, 3, 1, 2, 5]
+    numeri.remove(1)        # [9, 3, 2, 5]
+    numeri.sort()           # [2, 3, 5, 9]
+    numeri.sort(reverse=True)   # [9, 5, 3, 2]
+
+    print(numeri.count(3))  # 1
+    numeri.clear()          # []
+
+ATTENZIONE: remove() genera ValueError se il valore non e' presente nella
+lista. append(), sort() e gli altri metodi modificano la lista originale e non
+ne creano una nuova.
+
+
+6. FUNZIONI E OPERATORI UTILI
+--------------------------------------------------------------------------------
+
+    len(nome_lista)     Numero di elementi della lista
+    type(nome_lista)    Tipo: <class 'list'>
+    min(nome_lista)     Elemento minimo
+    max(nome_lista)     Elemento massimo
+    sum(nome_lista)     Somma degli elementi (se numerici)
+    sorted(nome_lista)  Restituisce una nuova lista ordinata, senza modificare
+                        l'originale
+
+Verificare la presenza di un elemento:
+
+    print("rosso" in colori)    # True
+
+Concatenazione e ripetizione:
+
+    print([1, 2] + [3])         # [1, 2, 3]
+    print([0] * 3)              # [0, 0, 0]
+
+
+7. SCORRERE UNA LISTA
+--------------------------------------------------------------------------------
+
+Con il ciclo for:
+
+    for colore in colori:
+        print(colore)
+
+Con gli indici:
+
+    for i in range(len(colori)):
+        print(i, colori[i])
+
+Con enumerate() (indice e valore insieme):
+
+    for i, colore in enumerate(colori):
+        print(i, colore)
+
+
+8. QUANDO USARE LE LISTE
+--------------------------------------------------------------------------------
+
+In Python le liste vengono usate:
+
+  - quando l'ordine degli elementi e' importante
+    (es. una classifica di punteggi);
+  - quando i dati devono essere modificabili
+    (aggiunta, rimozione o cambio di elementi);
+  - quando si devono scorrere iterativamente i dati
+    (cioe' ciclare frequentemente sugli elementi);
+  - quando si vogliono memorizzare elementi dello stesso tipo
+    (uso consigliato per mantenere il codice chiaro, anche se Python
+    permette di mescolare tipi diversi).
+
+Se i dati non devono mai cambiare conviene usare una tupla.
+
+
+9. CONFRONTO CON LE ALTRE STRUTTURE DATI
+--------------------------------------------------------------------------------
+
+    Struttura    Caratteristiche                                  Sintassi
+    ---------    ----------------------------------------------   ----------------
+    Lista        ordinata, modificabile, ammette duplicati        []
+    Tupla        ordinata, non modificabile, ammette duplicati    ()
+    Set          non ordinato, senza duplicati                    {}
+    Dizionario   coppie chiave-valore, chiavi univoche            {chiave: valore}

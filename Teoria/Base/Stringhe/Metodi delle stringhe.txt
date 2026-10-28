@@ -1,11 +1,187 @@
-Sulle stringhe si possono effettuare varie operazioni, ovvero:
-    - len()                       ---> Restituisce la lunghezza della stringa
-    - stringa[n]                  ---> Si accede ad una determinata posizione della stringa
-    - stringa.upper()             ---> Viene restituita l'intera stringa in maiuscolo
-    - stringa.lower()             ---> Viene restituita l'intera stringa in minuscolo
-    - stringa.count('')           ---> Ritorna quante volte c'è un determinato carattere nella stringa
-    - stringa.replace("c1", "c2") ---> Mette il carattere c2 al posto del carattere c1
+================================================================================
+I METODI DELLE STRINGHE IN PYTHON
+================================================================================
 
-Inoltre, quando si vogliono concatenare 2 stringhe diverse si usa la seguente sintassi:
-    - stringa 1 + stringa 2       ---> Se non si vuole lo spazio tra le stringhe;
-    - stringa 1 + ' ' + stringa 2 ---> Se si vuole lo spazio tra le stringhe;
+
+1. INTRODUZIONE
+--------------------------------------------------------------------------------
+
+I metodi sono funzioni integrate in Python che si applicano a una stringa
+usando la sintassi:
+
+    stringa.metodo()
+
+Per le stringhe esiste anche la funzione generale len(stringa), che restituisce
+la lunghezza della stringa e che non e' un metodo: si scrive len(s) e non
+s.len().
+
+REGOLA FONDAMENTALE: le stringhe sono immutabili, quindi i metodi NON
+modificano la stringa originale, ma restituiscono una NUOVA stringa (o un
+valore). Per conservare il risultato bisogna assegnarlo a una variabile.
+
+    s = "ciao"
+    s.upper()               # il risultato viene calcolato ma perso
+    print(s)                # ciao  (invariata)
+
+    s = s.upper()           # il risultato viene salvato nella variabile
+    print(s)                # CIAO
+
+
+2. MAIUSCOLE E MINUSCOLE
+--------------------------------------------------------------------------------
+
+    upper()         Restituisce l'intera stringa in maiuscolo
+    lower()         Restituisce l'intera stringa in minuscolo
+    capitalize()    Mette in maiuscolo solo la prima lettera della stringa
+    title()         Mette in maiuscolo la prima lettera di ogni parola
+    swapcase()      Inverte maiuscole e minuscole
+
+    a = "python e' bello"
+    print(a.upper())        # PYTHON E' BELLO
+    print(a.lower())        # python e' bello
+    print(a.capitalize())   # Python e' bello
+    print(a.title())        # Python E' Bello
+    print("PyThOn".swapcase())   # pYtHoN
+
+
+3. RICERCA E CONTEGGIO
+--------------------------------------------------------------------------------
+
+    count(x)        Restituisce quante volte il testo x compare nella stringa
+    find(x)         Restituisce l'indice della prima occorrenza di x
+                    (-1 se non e' presente)
+    index(x)        Come find(), ma genera ValueError se x non e' presente
+    startswith(x)   True se la stringa inizia con x
+    endswith(x)     True se la stringa finisce con x
+
+    a = "banana"
+    print(a.count("a"))         # 3
+    print(a.count("an"))        # 2
+    print(a.find("n"))          # 2
+    print(a.find("z"))          # -1
+    print(a.startswith("ba"))   # True
+    print(a.endswith("na"))     # True
+
+NOTA: count() non conta solo singoli caratteri, ma anche sequenze di caratteri
+(sottostringhe). count("") (stringa vuota) restituisce len(stringa) + 1 e non
+e' un uso utile: bisogna sempre indicare il testo da cercare.
+
+
+4. SOSTITUZIONE
+--------------------------------------------------------------------------------
+
+    replace(vecchio, nuovo)             Sostituisce tutte le occorrenze di
+                                        "vecchio" con "nuovo"
+    replace(vecchio, nuovo, n)          Sostituisce solo le prime n occorrenze
+
+    a = "gatto nero, gatto bianco"
+    print(a.replace("gatto", "cane"))       # cane nero, cane bianco
+    print(a.replace("gatto", "cane", 1))    # cane nero, gatto bianco
+
+Il metodo lavora su sequenze di caratteri, non solo su un singolo carattere:
+replace("c1", "c2") sostituisce il testo c1 con il testo c2 ovunque compaia.
+
+
+5. RIMOZIONE DEGLI SPAZI
+--------------------------------------------------------------------------------
+
+    strip()         Rimuove gli spazi all'inizio e alla fine della stringa
+    lstrip()        Rimuove gli spazi solo all'inizio (a sinistra)
+    rstrip()        Rimuove gli spazi solo alla fine (a destra)
+
+    a = "   ciao   "
+    print(a.strip())        # 'ciao'
+    print(a.lstrip())       # 'ciao   '
+    print(a.rstrip())       # '   ciao'
+
+Utile, ad esempio, per pulire il testo inserito dall'utente con input().
+
+
+6. DIVIDERE E UNIRE
+--------------------------------------------------------------------------------
+
+    split(sep)      Divide la stringa in una lista, usando sep come separatore
+                    (senza argomento divide sugli spazi)
+    join(lista)     Unisce gli elementi di una lista in una stringa, usando la
+                    stringa su cui e' chiamato come separatore
+
+    frase = "mela,pera,banana"
+    frutti = frase.split(",")
+    print(frutti)               # ['mela', 'pera', 'banana']
+
+    print("-".join(frutti))     # mela-pera-banana
+    print(" ".join(["Ciao", "a", "tutti"]))    # Ciao a tutti
+
+Esempio: contare le parole di una frase
+
+    testo = "il gatto dorme sul divano"
+    print(len(testo.split()))   # 5
+
+
+7. CONTROLLO DEL CONTENUTO
+--------------------------------------------------------------------------------
+
+Restituiscono True oppure False:
+
+    isalpha()       True se contiene solo lettere
+    isdigit()       True se contiene solo cifre
+    isalnum()       True se contiene solo lettere e cifre
+    isspace()       True se contiene solo spazi
+    isupper()       True se tutte le lettere sono maiuscole
+    islower()       True se tutte le lettere sono minuscole
+
+    print("ciao".isalpha())     # True
+    print("123".isdigit())      # True
+    print("ciao1".isalpha())    # False
+    print("ciao1".isalnum())    # True
+    print("CIAO".isupper())     # True
+
+Utile per validare l'input: ad esempio "12".isdigit() prima di usare int().
+
+
+8. ALLINEAMENTO E RIEMPIMENTO
+--------------------------------------------------------------------------------
+
+    center(n)       Centra la stringa in uno spazio di n caratteri
+    ljust(n)        Allinea a sinistra in uno spazio di n caratteri
+    rjust(n)        Allinea a destra in uno spazio di n caratteri
+    zfill(n)        Aggiunge zeri a sinistra fino a n caratteri
+
+    print("ciao".center(10, "-"))    # ---ciao---
+    print("7".zfill(3))              # 007
+
+
+9. FORMATTAZIONE
+--------------------------------------------------------------------------------
+
+    format()        Inserisce valori nelle graffe {} della stringa
+
+    print("{} ha {} anni".format("Mario", 17))    # Mario ha 17 anni
+
+Oggi si preferisce usare le f-string, piu' leggibili:
+
+    nome = "Mario"
+    print(f"{nome} ha 17 anni")
+
+
+10. TABELLA RIEPILOGATIVA
+--------------------------------------------------------------------------------
+
+    Metodo / funzione        Descrizione
+    ----------------------   ------------------------------------------------
+    len(s)                   lunghezza della stringa (funzione)
+    s[n]                     carattere in posizione n (operatore di accesso)
+    s.upper()                tutto maiuscolo
+    s.lower()                tutto minuscolo
+    s.capitalize()           prima lettera maiuscola
+    s.title()                iniziale maiuscola per ogni parola
+    s.count(x)               quante volte compare x
+    s.find(x)                indice della prima occorrenza (-1 se assente)
+    s.replace(a, b)          sostituisce a con b
+    s.strip()                toglie gli spazi a inizio e fine
+    s.split(sep)             divide la stringa in una lista
+    sep.join(lista)          unisce una lista in una stringa
+    s.startswith(x)          True se inizia con x
+    s.endswith(x)            True se finisce con x
+    s.isdigit()              True se contiene solo cifre
+    s.isalpha()              True se contiene solo lettere

@@ -1,19 +1,260 @@
-Una funzione è un blocco di codice che viene eseguito solamente quando viene richiamato,
-può restituire dati come risultato e servono per evitare la ripetizione del codice.
+================================================================================
+LE FUNZIONI IN PYTHON
+================================================================================
 
-Per poter creare una funzione in python, la sintassi è:
+
+1. DEFINIZIONE
+--------------------------------------------------------------------------------
+
+Una funzione e' un blocco di codice che viene eseguito solamente quando viene
+richiamato. Una funzione puo' ricevere dati in ingresso (parametri) e puo'
+restituire dati come risultato.
+
+Le funzioni servono per:
+
+  - evitare la ripetizione del codice: si scrive il codice una volta sola e lo
+    si richiama quando serve;
+  - dividere un programma complesso in parti piu' piccole e piu' facili da
+    capire e da correggere;
+  - riutilizzare lo stesso codice in punti diversi del programma.
+
+Python dispone gia' di molte funzioni integrate (built-in), come print(),
+len(), input(), int() e range(). Le funzioni descritte in questo file sono
+quelle create dal programmatore.
+
+
+2. CREAZIONE E CHIAMATA DI UNA FUNZIONE
+--------------------------------------------------------------------------------
+
+Per creare una funzione si usa la parola chiave def.
+
+Sintassi:
+
     def nome_funzione():
         istruzioni
-Per poter richiamare la funzione, si scrive il nome della funzione da richiamare con le
-parentesi tonde e si può chiamare la stessa funzione n volte.
 
-Per poter inviare dati al codice che ha invocato le funzioni, si utilizza l'operatore return,
-che interrompe l'esecuzione e restituisce il risultato
-ES:
+ATTENZIONE: la riga def termina con i due punti (:) e le istruzioni della
+funzione devono essere indentate.
+
+Per richiamare la funzione si scrive il nome della funzione seguito dalle
+parentesi tonde. La stessa funzione puo' essere richiamata n volte.
+
+    def stampa_linea():
+        print("-" * 20)
+
+    stampa_linea()
+    stampa_linea()
+    stampa_linea()
+
+La funzione deve essere definita PRIMA di essere chiamata: il codice di una
+funzione non viene eseguito alla definizione, ma solo alla chiamata.
+
+
+3. VALORE DI RITORNO: RETURN
+--------------------------------------------------------------------------------
+
+Per inviare dati al codice che ha invocato la funzione si utilizza
+l'istruzione return, che interrompe l'esecuzione della funzione e restituisce
+il risultato.
+
     def saluto():
         return "Ciao mondo"
 
     messaggio = saluto()
+    print(messaggio)            # Ciao mondo
 
-Per poter definire la struttura del progetto senza integrare subito le funzioni, si puo usare
-l'operatore pass, perchè le funzioni non possono essere vuote.
+Il valore restituito puo' essere salvato in una variabile oppure usato
+direttamente in un'espressione:
+
+    def quadrato(n):
+        return n * n
+
+    print(quadrato(5) + 1)      # 26
+
+Il codice scritto dopo un return, all'interno della stessa funzione, non viene
+mai eseguito.
+
+Una funzione senza return (oppure con return da solo) restituisce None:
+
+    def stampa(msg):
+        print(msg)
+
+    r = stampa("ciao")
+    print(r)                    # None
+
+DIFFERENZA tra print e return:
+
+    print()     mostra un valore sullo schermo, ma non lo restituisce
+    return      restituisce un valore al codice chiamante, che puo' usarlo
+
+Restituire piu' valori (viene restituita una tupla):
+
+    def min_max(valori):
+        return min(valori), max(valori)
+
+    minimo, massimo = min_max([4, 9, 1, 7])
+    print(minimo, massimo)      # 1 9
+
+
+4. L'ISTRUZIONE PASS
+--------------------------------------------------------------------------------
+
+Le funzioni non possono essere vuote. Per definire la struttura del progetto
+senza integrare subito il codice delle funzioni, si puo' usare l'istruzione
+pass, che non esegue nessuna operazione.
+
+    def calcola_media():
+        pass
+
+    def salva_dati():
+        pass
+
+Senza pass, una funzione vuota genererebbe un errore di sintassi.
+
+
+5. FUNZIONI CON PARAMETRI
+--------------------------------------------------------------------------------
+
+Le informazioni possono essere passate alle funzioni come parametri. I
+parametri vengono specificati all'interno delle parentesi della funzione,
+separati da una virgola.
+
+    def somma(a, b):
+        return a + b
+
+    print(somma(3, 4))          # 7
+
+Differenza tra parametro e argomento:
+
+    - Parametro   ---> variabile elencata tra le parentesi nella definizione
+                       della funzione (nell'esempio: a e b);
+    - Argomento   ---> valore effettivo passato alla funzione quando viene
+                       richiamata (nell'esempio: 3 e 4).
+
+
+6. NUMERO DI ARGOMENTI
+--------------------------------------------------------------------------------
+
+Per impostazione predefinita, una funzione deve essere chiamata con il numero
+corretto di argomenti con cui e' stata definita. Se viene richiamata con un
+numero errato di argomenti, viene generato un errore (TypeError).
+
+Ad esempio, se una funzione prevede 2 argomenti, bisogna richiamarla con
+esattamente 2 argomenti.
+
+    def somma(a, b):
+        return a + b
+
+    somma(3)            # TypeError: manca un argomento
+    somma(1, 2, 3)      # TypeError: troppi argomenti
+
+Se il numero di argomenti non e' noto in anticipo si usano *args e **kwargs,
+descritti nel file args_kwargs_python.txt.
+
+
+7. VALORI PREDEFINITI DEI PARAMETRI
+--------------------------------------------------------------------------------
+
+E' possibile assegnare valori predefiniti ai parametri. Se la funzione viene
+chiamata senza l'argomento corrispondente, viene usato il valore predefinito.
+
+    def saluto(nome="Carlo"):
+        print("Ciao", nome)
+
+    saluto("Luca")      # Ciao Luca
+    saluto()            # Ciao Carlo
+
+NOTA: print("Ciao", nome) inserisce da solo uno spazio tra i due valori. Se si
+scrivesse print("Ciao ", nome) gli spazi sarebbero due.
+
+I parametri con valore predefinito devono essere scritti DOPO quelli senza
+valore predefinito:
+
+    def potenza(base, esponente=2):     # corretto
+        return base ** esponente
+
+    print(potenza(5))           # 25
+    print(potenza(2, 3))        # 8
+
+    def errata(esponente=2, base):      # SyntaxError
+        ...
+
+
+8. ARGOMENTI POSIZIONALI E CON NOME
+--------------------------------------------------------------------------------
+
+Argomenti posizionali: vengono associati ai parametri in base all'ORDINE.
+
+    def presenta(nome, eta):
+        print(nome, "ha", eta, "anni")
+
+    presenta("Mario", 17)       # Mario ha 17 anni
+    presenta(17, "Mario")       # ordine sbagliato: risultato errato
+
+Argomenti con nome (keyword arguments): si indica il nome del parametro, quindi
+l'ordine non conta.
+
+    presenta(eta=17, nome="Mario")      # Mario ha 17 anni
+
+Si possono mescolare i due modi, ma gli argomenti posizionali devono venire
+PRIMA di quelli con nome:
+
+    presenta("Mario", eta=17)
+
+Gli argomenti con nome rendono la chiamata piu' leggibile, soprattutto nelle
+funzioni con molti parametri.
+
+
+9. AMBITO DELLE VARIABILI (SCOPE)
+--------------------------------------------------------------------------------
+
+Una variabile creata dentro una funzione e' LOCALE: esiste solo durante
+l'esecuzione della funzione e non e' visibile all'esterno.
+
+    def calcola():
+        risultato = 10
+        return risultato
+
+    calcola()
+    print(risultato)            # NameError: la variabile non esiste fuori
+
+Una variabile creata fuori da qualsiasi funzione e' GLOBALE ed e' leggibile
+anche dentro le funzioni. Per modificarla dentro una funzione bisognerebbe
+usare la parola chiave global, ma e' preferibile evitarlo: e' meglio passare i
+dati come parametri e restituire i risultati con return.
+
+Anche i parametri sono variabili locali della funzione.
+
+
+10. DOCUMENTAZIONE DI UNA FUNZIONE (DOCSTRING)
+--------------------------------------------------------------------------------
+
+Subito dopo la riga def si puo' scrivere una stringa multilinea che descrive
+cosa fa la funzione, i parametri e il valore restituito.
+
+    def area_rettangolo(base, altezza):
+        """Calcola l'area di un rettangolo.
+
+        Parametri: base e altezza (numeri).
+        Restituisce: l'area come numero.
+        """
+        return base * altezza
+
+La docstring si puo' leggere con help(area_rettangolo).
+
+
+11. RIEPILOGO
+--------------------------------------------------------------------------------
+
+    Elemento                 Sintassi
+    ----------------------   ----------------------------------------------
+    Definizione              def nome(parametri):
+    Chiamata                 nome(argomenti)
+    Restituire un valore     return valore
+    Funzione vuota           pass
+    Valore predefinito       def nome(parametro=valore):
+    Argomento con nome       nome(parametro=valore)
+    Numero variabile arg.    *args e **kwargs (vedi file dedicato)
+
+Gli argomenti a numero variabile (*args e **kwargs) sono descritti nel file
+dedicato: args_kwargs_python.txt

@@ -1,19 +1,152 @@
-Python è un linguaggio di programmazione molto diffuso. È stato creato da Guido van Rossum e rilasciato nel 1991 e
-viene utilizzato per:
-    - Sviluppo web (lato server);
-    - Sviluppo software;
-    - Matematica;
-    - Scripting di sistema.
+================================================================================
+INTRODUZIONE AL LINGUAGGIO PYTHON
+================================================================================
 
-Come mai si utilizza python?
-    - Python si utilizza per i seguenti motivi:
-    - Python può essere utilizzato su un server per creare applicazioni web.
-    - Python può essere utilizzato insieme a software per creare flussi di lavoro.
-    - Python è in grado di connettersi a sistemi di database. Può anche leggere e modificare file.
-    - Python può essere utilizzato per gestire grandi quantità di dati ed eseguire calcoli matematici complessi.
-    - Python può essere utilizzato per la prototipazione rapida o per lo sviluppo di software pronto per la produzione.
 
-La sintassi del python è molto facile da capire ed imparare per i seguenti motivi:
-    - Python è stato progettato per essere leggibile e presenta alcune somiglianze con la lingua inglese, con influenze dalla matematica.
-    - Python utilizza le interruzioni di riga per completare un comando, a differenza di altri linguaggi di programmazione che spesso utilizzano punti e virgola o parentesi.
-    - Python si basa sull'indentazione, utilizzando gli spazi bianchi, per definire l'ambito di un elemento, come ad esempio l'ambito di cicli, funzioni e classi. Altri linguaggi di programmazione spesso utilizzano le parentesi graffe a questo scopo.
+1. COS'E' PYTHON
+--------------------------------------------------------------------------------
+
+Python e' un linguaggio di programmazione ad alto livello, molto diffuso e
+utilizzato in moltissimi ambiti. E' stato creato da Guido van Rossum e
+rilasciato nel 1991.
+
+Il nome non deriva dal serpente, ma dal gruppo comico britannico Monty Python,
+di cui l'autore era appassionato.
+
+Oggi Python e' sviluppato come progetto open source (gratuito e liberamente
+utilizzabile) ed e' gestito dalla Python Software Foundation. La versione in
+uso e' Python 3: la vecchia versione Python 2 non e' piu' supportata e non va
+usata per nuovi progetti.
+
+
+2. PER COSA VIENE UTILIZZATO
+--------------------------------------------------------------------------------
+
+Python viene utilizzato per:
+
+  - sviluppo web (lato server);
+  - sviluppo software;
+  - matematica e calcolo scientifico;
+  - scripting di sistema (automazione di operazioni ripetitive).
+
+Altri ambiti molto comuni sono l'analisi dei dati, l'intelligenza artificiale
+e il machine learning.
+
+
+3. PERCHE' SI UTILIZZA PYTHON
+--------------------------------------------------------------------------------
+
+Python si utilizza per i seguenti motivi:
+
+  - Puo' essere utilizzato su un server per creare applicazioni web.
+  - Puo' essere utilizzato insieme ad altri software per creare flussi di
+    lavoro (automazione di processi).
+  - E' in grado di connettersi a sistemi di database e puo' anche leggere e
+    modificare file.
+  - Puo' essere utilizzato per gestire grandi quantita' di dati ed eseguire
+    calcoli matematici complessi.
+  - Puo' essere utilizzato per la prototipazione rapida (creare velocemente
+    una versione di prova di un programma) oppure per lo sviluppo di software
+    pronto per la produzione.
+
+
+4. CARATTERISTICHE DEL LINGUAGGIO
+--------------------------------------------------------------------------------
+
+4.1 Interpretato
+    Il codice viene eseguito riga per riga da un interprete, senza bisogno di
+    una fase di compilazione separata. Questo permette di scrivere e provare
+    il codice molto rapidamente.
+
+4.2 Tipizzazione dinamica
+    Non e' necessario dichiarare il tipo di una variabile: viene determinato
+    automaticamente in base al valore assegnato.
+
+4.3 Multipiattaforma
+    Lo stesso programma funziona su Windows, Linux e macOS, a condizione che
+    l'interprete Python sia installato.
+
+4.4 Multi-paradigma
+    Supporta la programmazione procedurale, la programmazione a oggetti e
+    quella funzionale.
+
+4.5 Ricco di librerie
+    Dispone di una vastissima libreria standard e di migliaia di librerie
+    esterne, che permettono di fare molte operazioni senza scrivere il codice
+    da zero.
+
+
+5. PERCHE' LA SINTASSI E' FACILE DA IMPARARE
+--------------------------------------------------------------------------------
+
+La sintassi di Python e' molto facile da capire e da imparare per i seguenti
+motivi:
+
+  - E' stato progettato per essere leggibile: presenta alcune somiglianze con
+    la lingua inglese, con influenze dalla matematica.
+  - Utilizza le interruzioni di riga per completare un comando, a differenza di
+    altri linguaggi di programmazione che spesso utilizzano il punto e virgola
+    o le parentesi.
+  - Si basa sull'indentazione (cioe' sugli spazi bianchi a inizio riga) per
+    definire l'ambito di un elemento, come ad esempio l'ambito di cicli,
+    funzioni e classi. Altri linguaggi di programmazione spesso utilizzano le
+    parentesi graffe a questo scopo.
+
+Confronto: stampare "Ciao" in Python e in C.
+
+    Python:
+
+        print("Ciao")
+
+    C:
+
+        #include <stdio.h>
+
+        int main() {
+            printf("Ciao\n");
+            return 0;
+        }
+
+
+6. IL PRIMO PROGRAMMA
+--------------------------------------------------------------------------------
+
+Un programma Python e' un file di testo con estensione .py.
+
+Esempio (file ciao.py):
+
+    print("Hello, World!")
+
+Per eseguirlo si apre il terminale e si scrive:
+
+    python ciao.py
+
+Su alcuni sistemi (ad esempio Linux e macOS) il comando da usare e' python3:
+
+    python3 ciao.py
+
+Python puo' essere usato anche in modalita' interattiva (REPL): scrivendo
+python nel terminale si apre una console in cui ogni istruzione viene eseguita
+subito.
+
+    >>> 2 + 3
+    5
+    >>> print("Ciao")
+    Ciao
+
+
+7. RIEPILOGO
+--------------------------------------------------------------------------------
+
+    Aspetto                 Python
+    --------------------    ----------------------------------------------
+    Creatore                Guido van Rossum
+    Primo rilascio          1991
+    Tipo di linguaggio      interpretato, ad alto livello, open source
+    Tipizzazione            dinamica
+    Blocchi di codice       definiti dall'indentazione
+    Fine istruzione         a capo (non serve il punto e virgola)
+    Estensione dei file     .py
+
+La sintassi di base del linguaggio e' descritta nel file dedicato:
+sintassi_base_python.txt

@@ -1,23 +1,219 @@
-Il blocco try...except permette di testare un blocco di codice per individuare degli errori
-senza bloccare l'esecuzione del programma.
+================================================================================
+LA GESTIONE DELLE ECCEZIONI IN PYTHON: TRY ... EXCEPT
+================================================================================
 
-La sintassi è la seguente:
+
+1. DEFINIZIONE
+--------------------------------------------------------------------------------
+
+Quando durante l'esecuzione di un programma si verifica un errore (ad esempio
+una divisione per zero o la conversione di un testo in numero non valido),
+Python genera un'ECCEZIONE e, se nessuno la gestisce, interrompe il programma
+mostrando un messaggio di errore.
+
+Il blocco try...except permette di testare un blocco di codice per individuare
+gli errori senza bloccare l'esecuzione del programma: l'errore viene
+intercettato e gestito, e il programma puo' proseguire.
+
+Esempio senza gestione dell'errore:
+
+    numero = int("abc")     # ValueError: il programma si interrompe
+    print("fine")           # questa riga non viene mai eseguita
+
+Esempio con gestione dell'errore:
+
+    try:
+        numero = int("abc")
+    except ValueError:
+        print("Il valore inserito non e' un numero")
+    print("fine")           # il programma prosegue
+
+
+2. SINTASSI COMPLETA
+--------------------------------------------------------------------------------
+
     try:
         blocco di codice da eseguire
-    except:
-        blocco di codice da eseguire quando si verifica un errore
+    except TipoErrore:
+        blocco eseguito quando si verifica un errore di quel tipo
         nel blocco try
     else:
-        blocco di codice da eseguire se non vengono rilevati errori
+        blocco eseguito se NON vengono rilevati errori nel blocco try
     finally:
-        blocco eseguito indipendentemente dal fatto che il blocco try
-        generi un errore o meno
+        blocco eseguito SEMPRE, indipendentemente dal fatto che il
+        blocco try generi un errore o meno
 
-In una determinata condizione, si può sollevare un'eccezione tramite l'istruzione raise:
+Funzione di ogni blocco:
+
+    try       contiene il codice che potrebbe generare un errore
+    except    gestisce l'errore (puo' essere presente piu' volte)
+    else      contiene il codice da eseguire solo se try e' andato a buon fine
+    finally   contiene il codice che deve essere eseguito in ogni caso
+              (es. chiusura di un file o di una connessione)
+
+Il blocco try e' obbligatorio e deve essere seguito da almeno un except oppure
+da un finally. I blocchi else e finally sono facoltativi.
+
+Ordine di esecuzione:
+
+    - nessun errore:  try -> else -> finally
+    - errore gestito: try (fino all'errore) -> except -> finally
+
+
+3. GESTIRE TIPI DI ERRORE SPECIFICI
+--------------------------------------------------------------------------------
+
+E' buona norma indicare il tipo di errore che si vuole gestire. Si possono
+usare piu' blocchi except, uno per ogni tipo di errore.
+
+    try:
+        a = int(input("Primo numero: "))
+        b = int(input("Secondo numero: "))
+        print(a / b)
+    except ValueError:
+        print("Errore: inserire solo numeri interi")
+    except ZeroDivisionError:
+        print("Errore: divisione per zero")
+
+Python esegue il primo except compatibile con l'errore generato e ignora gli
+altri.
+
+Piu' tipi di errore nello stesso blocco (tupla di eccezioni):
+
+    except (ValueError, TypeError):
+        print("Valore non valido")
+
+Leggere il messaggio dell'errore con "as":
+
+    try:
+        x = 10 / 0
+    except ZeroDivisionError as e:
+        print("Si e' verificato un errore:", e)    # division by zero
+
+ATTENZIONE: un except senza tipo (except:) intercetta qualsiasi errore, anche
+quelli inattesi, e rende difficile individuare i problemi. E' preferibile
+indicare sempre il tipo di errore. Se si vuole gestire un errore generico si
+usa "except Exception as e".
+
+
+4. PRINCIPALI ECCEZIONI
+--------------------------------------------------------------------------------
+
+    ValueError          valore del tipo giusto ma non valido
+                        (es. int("abc"))
+    TypeError           operazione su un tipo di dato non adatto
+                        (es. "a" + 1)
+    ZeroDivisionError   divisione per zero
+    IndexError          indice fuori dai limiti di una lista o tupla
+    KeyError            chiave inesistente in un dizionario
+    FileNotFoundError   file non trovato
+    NameError           variabile non definita
+    Exception           classe base di quasi tutte le eccezioni
+
+
+5. I BLOCCHI ELSE E FINALLY
+--------------------------------------------------------------------------------
+
+Esempio completo con lettura da file:
+
+    try:
+        file = open("dati.txt", "r")
+        contenuto = file.read()
+    except FileNotFoundError:
+        print("Il file non esiste")
+    else:
+        print("Lettura riuscita:", contenuto)
+    finally:
+        print("Operazione terminata")
+
+Nel blocco finally si inserisce il codice di "pulizia", che deve essere sempre
+eseguito (ad esempio la chiusura di un file o di una connessione a un
+database).
+
+    file = None
+    try:
+        file = open("dati.txt", "r")
+        print(file.read())
+    except FileNotFoundError:
+        print("Il file non esiste")
+    finally:
+        if file is not None:
+            file.close()
+
+
+6. SOLLEVARE UN'ECCEZIONE: RAISE
+--------------------------------------------------------------------------------
+
+In una determinata condizione si puo' sollevare un'eccezione in modo volontario
+tramite l'istruzione raise. Serve per segnalare che i dati o lo stato del
+programma non sono validi.
+
     x = -1
     if x < 0:
         raise Exception("Nessun numero minore di 0")
 
+Si puo' sollevare un'eccezione di un tipo specifico:
+
     y = "Ciao"
-    if not type(x) is int:
+    if not isinstance(y, int):
         raise TypeError("Solamente int ammessi")
+
+Esempio all'interno di una funzione, con la gestione dell'errore:
+
+    def radice(n):
+        if n < 0:
+            raise ValueError("Il numero deve essere maggiore o uguale a 0")
+        return n ** 0.5
+
+    try:
+        print(radice(-4))
+    except ValueError as e:
+        print("Errore:", e)    # Errore: Il numero deve essere maggiore o uguale a 0
+
+Dentro un blocco except, "raise" da solo rilancia l'eccezione appena
+intercettata, ad esempio dopo averla registrata.
+
+
+7. ESEMPIO PRATICO: VALIDAZIONE DELL'INPUT
+--------------------------------------------------------------------------------
+
+Chiedere un numero all'utente finche' il valore inserito non e' valido:
+
+    while True:
+        try:
+            eta = int(input("Inserisci la tua eta': "))
+            if eta < 0:
+                raise ValueError("L'eta' non puo' essere negativa")
+        except ValueError as e:
+            print("Valore non valido:", e)
+        else:
+            break
+
+    print("Eta' inserita:", eta)
+
+
+8. QUANDO USARE TRY ... EXCEPT
+--------------------------------------------------------------------------------
+
+Il blocco try...except si usa quando:
+
+  - l'errore dipende da fattori esterni al programma e non e' evitabile
+    (input dell'utente, file mancanti, connessioni di rete, database);
+  - si vuole evitare che il programma si interrompa all'improvviso e mostrare
+    all'utente un messaggio chiaro;
+  - si deve liberare una risorsa in ogni caso (blocco finally).
+
+Non va usato per nascondere errori di programmazione: un errore dovuto a un
+bug va corretto nel codice, non silenziato con un except generico.
+
+
+9. RIEPILOGO
+--------------------------------------------------------------------------------
+
+    Parola chiave   Quando viene eseguita
+    -------------   ------------------------------------------------------
+    try             sempre: contiene il codice da testare
+    except          solo se nel try si verifica un errore di quel tipo
+    else            solo se nel try NON si verificano errori
+    finally         sempre, con o senza errori
+    raise           solleva volontariamente un'eccezione

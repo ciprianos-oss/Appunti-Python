@@ -1,20 +1,214 @@
-I dizionari vengono usati per memorizzare valori dei dati in coppie chiave-valore,
-è una collezione ordinata, modificabile e che non ammette duplicati.
-Per dizionario ordinato si intende che le voci hanno un ordine definito in fase di dichiarazione
-che tale ordine non cambierà.
+================================================================================
+I DIZIONARI IN PYTHON
+================================================================================
 
-Per definire un dizionario, si usa la seguente sintassi:
+
+1. DEFINIZIONE
+--------------------------------------------------------------------------------
+
+I dizionari (dictionary, tipo dict) sono una struttura dati di Python usata per
+memorizzare i dati in coppie chiave-valore. Sono una collezione ordinata e
+modificabile, in cui le chiavi sono univoche (non ammettono duplicati).
+
+Ogni chiave e' associata al suo corrispettivo valore: ad esempio la chiave
+"nome" e' associata al valore "Mario", la chiave "cognome" al valore "Rossi".
+
+Sintassi:
+
     nome_dizionario = {
         "chiave": valore,
         "chiave": valore
     }
 
-    Il valore puo essere qualsiasi tipo di dato di python
+Esempio:
 
-Per poter accedere alle voci del dizionario, si possono richiamare tramite il nome della chiave:
+    studente = {
+        "nome": "Mario",
+        "cognome": "Rossi",
+        "eta": 17,
+        "classe": "4A"
+    }
+    print(studente)
+
+
+2. CARATTERISTICHE PRINCIPALI
+--------------------------------------------------------------------------------
+
+2.1 Coppie chiave-valore
+    I dati sono memorizzati in coppie: si accede a un valore tramite la sua
+    chiave e non tramite un indice numerico.
+
+2.2 Ordinati
+    Le voci mantengono l'ordine con cui sono state dichiarate e tale ordine
+    non cambia. (Questa garanzia vale dalla versione 3.7 di Python; nelle
+    versioni precedenti i dizionari non erano ordinati.)
+
+2.3 Modificabili
+    Dopo la creazione e' possibile cambiare i valori, aggiungere nuove voci e
+    rimuovere quelle esistenti.
+
+2.4 Chiavi univoche
+    Non possono esistere due voci con la stessa chiave. Se si dichiara due
+    volte la stessa chiave, vale l'ultimo valore assegnato.
+
+    d = {"a": 1, "b": 2, "a": 3}
+    print(d)             # {'a': 3, 'b': 2}
+
+    I VALORI, invece, possono essere duplicati.
+
+2.5 Tipi di dato
+    Il valore puo' essere qualsiasi tipo di dato di Python (numeri, stringhe,
+    liste, tuple, altri dizionari, ...). La chiave deve invece essere di un
+    tipo immutabile (hashable): stringhe, numeri e tuple sono ammesse, liste e
+    dizionari no.
+
+
+3. CREAZIONE DI UN DIZIONARIO
+--------------------------------------------------------------------------------
+
+Con le parentesi graffe:
+
+    persona = {"nome": "Anna", "eta": 30}
+
+Dizionario vuoto:
+
+    vuoto = {}
+
+Con il costruttore dict():
+
+    persona = dict(nome="Anna", eta=30)
+
+
+4. ACCESSO AI VALORI
+--------------------------------------------------------------------------------
+
+Si accede alle voci tramite il nome della chiave:
+
     nome_dizionario["chiave"]
-Inoltre per determinare il numero di elementi presenti nel dizionario, la sintassi è:
+
+    print(studente["nome"])      # Mario
+    print(studente["classe"])    # 4A
+
+Se la chiave non esiste viene generato l'errore KeyError.
+
+Il metodo get() restituisce None (o un valore a scelta) se la chiave non esiste,
+senza generare errori:
+
+    print(studente.get("nome"))              # Mario
+    print(studente.get("citta"))             # None
+    print(studente.get("citta", "n.d."))     # n.d.
+
+Numero di elementi (coppie chiave-valore) presenti nel dizionario:
+
     len(nome_dizionario)
 
-I dizionari vengono associati ad una determinata chiave il suo corrispettivo valore, ad esempio
-nome e cognome ecc.
+    print(len(studente))         # 4
+
+Verificare la presenza di una chiave:
+
+    print("eta" in studente)     # True
+
+
+5. MODIFICA DEL DIZIONARIO
+--------------------------------------------------------------------------------
+
+Cambiare il valore di una chiave esistente:
+
+    studente["eta"] = 18
+
+Aggiungere una nuova voce (se la chiave non esiste viene creata):
+
+    studente["citta"] = "Bologna"
+
+Aggiungere o modificare piu' voci insieme:
+
+    studente.update({"classe": "5A", "voto": 8})
+
+Rimuovere una voce:
+
+    studente.pop("voto")         # rimuove e restituisce il valore
+    del studente["citta"]        # rimuove la voce
+
+Svuotare il dizionario:
+
+    studente.clear()
+
+
+6. METODI INTEGRATI
+--------------------------------------------------------------------------------
+
+    get(k)            Restituisce il valore della chiave k (None se assente)
+    keys()            Restituisce tutte le chiavi
+    values()          Restituisce tutti i valori
+    items()           Restituisce tutte le coppie (chiave, valore)
+    update(d)         Aggiunge o aggiorna le voci con quelle del dizionario d
+    pop(k)            Rimuove la chiave k e restituisce il suo valore
+    popitem()         Rimuove e restituisce l'ultima coppia inserita
+    setdefault(k, v)  Restituisce il valore di k; se assente la crea con v
+    clear()           Rimuove tutte le voci
+    copy()            Restituisce una copia del dizionario
+
+Esempio:
+
+    prodotto = {"nome": "penna", "prezzo": 1.5}
+
+    print(list(prodotto.keys()))      # ['nome', 'prezzo']
+    print(list(prodotto.values()))    # ['penna', 1.5]
+    print(list(prodotto.items()))     # [('nome', 'penna'), ('prezzo', 1.5)]
+
+
+7. SCORRERE UN DIZIONARIO
+--------------------------------------------------------------------------------
+
+Scorrere le chiavi (comportamento predefinito):
+
+    for chiave in studente:
+        print(chiave)
+
+Scorrere i valori:
+
+    for valore in studente.values():
+        print(valore)
+
+Scorrere chiavi e valori insieme:
+
+    for chiave, valore in studente.items():
+        print(chiave, "->", valore)
+
+
+8. DIZIONARI ANNIDATI
+--------------------------------------------------------------------------------
+
+Il valore di una voce puo' essere a sua volta un dizionario o una lista.
+
+    classe = {
+        "mario": {"eta": 17, "voti": [7, 8, 9]},
+        "anna":  {"eta": 16, "voti": [8, 8, 10]}
+    }
+
+    print(classe["mario"]["eta"])        # 17
+    print(classe["anna"]["voti"][2])     # 10
+
+
+9. QUANDO USARE I DIZIONARI
+--------------------------------------------------------------------------------
+
+I dizionari si usano quando i dati devono essere associati a un'etichetta
+significativa invece che a una posizione. Esempi tipici:
+
+  - descrivere un oggetto con le sue proprieta' (nome, cognome, eta', ...);
+  - cercare rapidamente un valore a partire da una chiave
+    (es. rubrica: nome -> numero di telefono);
+  - contare le occorrenze (es. parola -> numero di volte che compare);
+  - rappresentare dati strutturati, come quelli dei file JSON.
+
+
+10. CONFRONTO CON LE ALTRE STRUTTURE DATI
+--------------------------------------------------------------------------------
+
+    Struttura    Caratteristiche                                  Sintassi
+    ---------    ----------------------------------------------   ----------------
+    Lista        ordinata, modificabile, ammette duplicati        []
+    Tupla        ordinata, non modificabile, ammette duplicati    ()
+    Set          non ordinato, senza duplicati                    {}
+    Dizionario   coppie chiave-valore, chiavi univoche            {chiave: valore}

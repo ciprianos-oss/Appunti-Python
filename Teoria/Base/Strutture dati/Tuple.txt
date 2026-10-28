@@ -1,18 +1,229 @@
-Le tuple vengono utilizzate per memorizzare più elementi in una singola variabile
-ed è una collezione ordinata e immutabile, il che significa che non si puo aggiungere o rimuovere
-nessun elemento dopo la creazione della tupla.
+================================================================================
+LE TUPLE IN PYTHON
+================================================================================
 
-Per dichiarare una tupla, la sintassi è la seguente:
-    nome_tupla = (elementi)
-Inoltre gli elementi vanno inseriti nella tupla in fase di dichiarazione di tale struttura dati.
 
-Poiché sono indicizzate, le tuple possono contenere valori elementi duplicati e per accedere
-ai valori della tupla la sintassi è:
-    nome_tupla[i] ---> Dove i indica l'indice della tupla a cui accedere
+1. DEFINIZIONE
+--------------------------------------------------------------------------------
 
-Le funzioni che si possono usare sulle tuple sono:
-    - len(nome_tupla)  ---> Restituisce il numero di elementi contenuti nella tupla;
-    - type(nome_tupla) ---> Restituisce il tipo 'tuple'
+Le tuple sono una struttura dati di Python utilizzata per memorizzare piu'
+elementi in una singola variabile. Una tupla e' una collezione ordinata e
+immutabile: dopo la creazione non e' possibile aggiungere, rimuovere o
+modificare i suoi elementi.
 
-Le tuple vengono utilizzate quando i dati non devono MAI cambiare e si vogliono proteggere
-da modifiche accidentali.
+Una tupla si crea utilizzando le parentesi tonde.
+
+    colori = ("rosso", "verde", "blu")
+    print(colori)    # ('rosso', 'verde', 'blu')
+
+
+2. CARATTERISTICHE PRINCIPALI
+--------------------------------------------------------------------------------
+
+2.1 Ordinate
+    Gli elementi mantengono sempre l'ordine con cui sono stati inseriti e
+    ognuno ha una posizione precisa (indice). Il primo elemento ha indice 0.
+
+2.2 Immutabili
+    Una volta creata, la tupla non puo' essere modificata: non si possono
+    aggiungere elementi, rimuoverli o cambiarne il valore. Tentare di farlo
+    genera l'errore TypeError.
+
+    colori[0] = "giallo"    # TypeError: 'tuple' object does not support
+                            # item assignment
+
+2.3 Indicizzate, con duplicati ammessi
+    Poiche' ogni elemento e' identificato dalla sua posizione, la tupla puo'
+    contenere piu' volte lo stesso valore.
+
+    voti = (7, 8, 7, 9, 7)
+    print(len(voti))        # 5
+
+2.4 Tipi di dato eterogenei
+    Una tupla puo' contenere elementi di tipi diversi, anche liste o altre
+    tuple.
+
+    studente = ("Mario", 17, True, 7.5)
+
+
+3. CREAZIONE DI UNA TUPLA
+--------------------------------------------------------------------------------
+
+Sintassi:
+
+    nome_tupla = (elemento1, elemento2, elemento3)
+
+Gli elementi devono essere inseriti nella tupla al momento della
+dichiarazione, perche' in seguito non sara' piu' possibile aggiungerne.
+
+Con il costruttore tuple():
+
+    numeri = tuple([1, 2, 3])
+    print(numeri)           # (1, 2, 3)
+
+Tupla vuota:
+
+    vuota = ()
+
+Tupla con un solo elemento:
+
+    singola = ("ciao",)     # la virgola finale e' OBBLIGATORIA
+    non_tupla = ("ciao")    # questa e' una semplice stringa
+
+ATTENZIONE: senza la virgola Python non riconosce la tupla, perche' le
+parentesi da sole servono solo a raggruppare le espressioni.
+
+Le parentesi sono facoltative (impacchettamento o "packing"):
+
+    punto = 3, 4
+    print(type(punto))      # <class 'tuple'>
+
+
+4. ACCESSO AGLI ELEMENTI
+--------------------------------------------------------------------------------
+
+Si accede agli elementi tramite l'indice, scritto tra parentesi quadre:
+
+    nome_tupla[i]           # i = indice dell'elemento a cui accedere
+
+    colori = ("rosso", "verde", "blu", "giallo")
+
+    print(colori[0])        # rosso (primo elemento)
+    print(colori[2])        # blu
+
+Indici negativi (si parte dalla fine):
+
+    print(colori[-1])       # giallo (ultimo elemento)
+    print(colori[-2])       # blu
+
+Slicing (estrazione di una parte della tupla, il risultato e' una tupla):
+
+    print(colori[1:3])      # ('verde', 'blu')
+    print(colori[:2])       # ('rosso', 'verde')
+    print(colori[2:])       # ('blu', 'giallo')
+
+Accedere a un indice inesistente genera l'errore IndexError.
+
+
+5. IMMUTABILITA'
+--------------------------------------------------------------------------------
+
+Una tupla non puo' essere modificata, ma e' possibile ottenere una nuova tupla
+partendo da quella esistente.
+
+Concatenazione di tuple:
+
+    a = (1, 2, 3)
+    b = (4, 5)
+    c = a + b
+    print(c)                # (1, 2, 3, 4, 5)
+
+Ripetizione:
+
+    print(a * 2)            # (1, 2, 3, 1, 2, 3)
+
+Modificare una tupla tramite conversione in lista:
+
+    tupla = ("a", "b", "c")
+    lista = list(tupla)     # conversione in lista
+    lista.append("d")       # modifica
+    tupla = tuple(lista)    # conversione in nuova tupla
+    print(tupla)            # ('a', 'b', 'c', 'd')
+
+In realta' si crea una nuova tupla: quella originale non viene mai modificata.
+
+NOTA: se una tupla contiene un oggetto modificabile (ad esempio una lista),
+l'immutabilita' riguarda solo i riferimenti della tupla: il contenuto della
+lista interna puo' comunque cambiare.
+
+    t = (1, [2, 3])
+    t[1].append(4)
+    print(t)                # (1, [2, 3, 4])
+
+
+6. FUNZIONI E METODI
+--------------------------------------------------------------------------------
+
+Funzioni utilizzabili sulle tuple:
+
+    len(nome_tupla)         Restituisce il numero di elementi della tupla
+    type(nome_tupla)        Restituisce il tipo: <class 'tuple'>
+    min(nome_tupla)         Restituisce l'elemento minimo
+    max(nome_tupla)         Restituisce l'elemento massimo
+    sum(nome_tupla)         Restituisce la somma degli elementi (se numerici)
+
+Le tuple hanno solo due metodi:
+
+    nome_tupla.count(x)     Conta quante volte x compare nella tupla
+    nome_tupla.index(x)     Restituisce l'indice della prima occorrenza di x
+
+    voti = (7, 8, 7, 9, 7)
+    print(voti.count(7))    # 3
+    print(voti.index(9))    # 3
+
+Verificare la presenza di un elemento:
+
+    print(8 in voti)        # True
+
+Scorrere gli elementi:
+
+    for voto in voti:
+        print(voto)
+
+
+7. UNPACKING (DISIMPACCHETTAMENTO)
+--------------------------------------------------------------------------------
+
+Permette di assegnare gli elementi di una tupla a singole variabili.
+Il numero di variabili deve coincidere con il numero di elementi.
+
+    studente = ("Mario", 17, "4A")
+    nome, eta, classe = studente
+
+    print(nome)             # Mario
+    print(eta)              # 17
+    print(classe)           # 4A
+
+Con l'asterisco * si raccolgono gli elementi rimanenti in una lista:
+
+    numeri = (1, 2, 3, 4, 5)
+    primo, *centrali, ultimo = numeri
+    print(primo)            # 1
+    print(centrali)         # [2, 3, 4]
+    print(ultimo)           # 5
+
+Lo unpacking permette anche di restituire piu' valori da una funzione:
+
+    def min_max(valori):
+        return min(valori), max(valori)    # restituisce una tupla
+
+    minimo, massimo = min_max((4, 9, 1, 7))
+
+
+8. QUANDO USARE LE TUPLE
+--------------------------------------------------------------------------------
+
+Le tuple si usano quando i dati non devono MAI cambiare e si vogliono
+proteggere da modifiche accidentali. Esempi tipici:
+
+  - coordinate (x, y) o dati fissi come i giorni della settimana;
+  - valori restituiti da una funzione;
+  - chiavi di un dizionario (una lista non puo' esserlo, una tupla si);
+  - elementi di un set (anche in questo caso una lista non e' ammessa).
+
+Vantaggi rispetto alle liste:
+
+  - protezione dei dati da modifiche accidentali;
+  - occupano meno memoria e sono leggermente piu' veloci;
+  - possono essere usate come chiavi di dizionario.
+
+
+9. CONFRONTO CON LE ALTRE STRUTTURE DATI
+--------------------------------------------------------------------------------
+
+    Struttura    Caratteristiche                                  Sintassi
+    ---------    ----------------------------------------------   ----------------
+    Lista        ordinata, modificabile, ammette duplicati        []
+    Tupla        ordinata, non modificabile, ammette duplicati    ()
+    Set          non ordinato, senza duplicati                    {}
+    Dizionario   coppie chiave-valore, chiavi univoche            {chiave: valore}

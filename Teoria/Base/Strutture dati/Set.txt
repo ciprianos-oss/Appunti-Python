@@ -1,0 +1,140 @@
+================================================================================
+I SET IN PYTHON
+================================================================================
+
+
+1. DEFINIZIONE
+--------------------------------------------------------------------------------
+
+I set sono una struttura dati di Python utilizzata per memorizzare piu' elementi
+in una singola variabile. Gli elementi di un set sono non ordinati, non
+modificabili e non ammettono valori duplicati.
+
+Un set si crea utilizzando le parentesi graffe oppure il costruttore set().
+
+    frutta = {"mela", "banana", "ciliegia"}
+    print(frutta)
+
+
+2. CARATTERISTICHE PRINCIPALI
+--------------------------------------------------------------------------------
+
+2.1 Non ordinati
+    Gli elementi di un set non hanno un ordine definito. Ogni volta che si
+    stampa il set, gli elementi possono comparire in un ordine diverso. Per
+    questo motivo non e' possibile accedere agli elementi tramite indice
+    (frutta[0] genera un errore) ne' tramite chiave.
+
+2.2 Non modificabili
+    Un elemento gia' presente nel set non puo' essere cambiato. Il set in se',
+    pero', e' modificabile: e' possibile aggiungere nuovi elementi e rimuovere
+    quelli esistenti.
+
+2.3 Senza duplicati
+    Un set non puo' contenere due volte lo stesso valore. Se si inseriscono
+    elementi duplicati, questi vengono ignorati.
+
+    numeri = {1, 2, 2, 3, 3, 3}
+    print(numeri)        # {1, 2, 3}
+    print(len(numeri))   # 3
+
+2.4 Tipi di dato
+    Gli elementi di un set possono essere di tipi diversi (stringhe, numeri,
+    booleani), purche' siano immutabili (hashable). Liste e dizionari non
+    possono essere inseriti in un set.
+
+    misto = {"ciao", 34, True, 3.14}
+
+
+3. CREAZIONE DI UN SET
+--------------------------------------------------------------------------------
+
+Con le parentesi graffe:
+
+    colori = {"rosso", "verde", "blu"}
+
+Con il costruttore set():
+
+    colori = set(["rosso", "verde", "blu"])
+
+ATTENZIONE: per creare un set vuoto bisogna usare set(), perche' {} crea un
+dizionario vuoto.
+
+    vuoto = set()
+
+
+4. OPERAZIONI PRINCIPALI
+--------------------------------------------------------------------------------
+
+Aggiungere un elemento:
+
+    colori.add("giallo")
+
+Aggiungere piu' elementi:
+
+    colori.update(["nero", "bianco"])
+
+Rimuovere un elemento:
+
+    colori.remove("rosso")    # errore se l'elemento non esiste
+    colori.discard("rosso")   # nessun errore se l'elemento non esiste
+
+Svuotare il set:
+
+    colori.clear()
+
+Verificare la presenza di un elemento:
+
+    print("verde" in colori)  # True oppure False
+
+Scorrere gli elementi:
+
+    for colore in colori:
+        print(colore)
+
+
+5. OPERAZIONI INSIEMISTICHE
+--------------------------------------------------------------------------------
+
+I set permettono di eseguire le operazioni tipiche della teoria degli insiemi.
+
+    a = {1, 2, 3, 4}
+    b = {3, 4, 5, 6}
+
+    print(a | b)    # unione: {1, 2, 3, 4, 5, 6}
+    print(a & b)    # intersezione: {3, 4}
+    print(a - b)    # differenza: {1, 2}
+    print(a ^ b)    # differenza simmetrica: {1, 2, 5, 6}
+
+Gli stessi risultati si ottengono con i metodi union(), intersection(),
+difference() e symmetric_difference().
+
+
+6. UTILIZZI COMUNI
+--------------------------------------------------------------------------------
+
+I set sono particolarmente utili per:
+
+  - eliminare i duplicati da una lista;
+  - verificare rapidamente se un elemento e' presente in una collezione;
+  - confrontare insiemi di dati (elementi in comune, elementi mancanti).
+
+Esempio di rimozione dei duplicati da una lista:
+
+    lista = [1, 2, 2, 3, 4, 4, 5]
+    senza_duplicati = list(set(lista))
+    print(senza_duplicati)   # [1, 2, 3, 4, 5]
+
+Se si vuole mantenere l'ordine originale, non si deve usare solo set(), perche'
+non garantisce l'ordine.
+
+
+7. CONFRONTO CON LE ALTRE STRUTTURE DATI
+--------------------------------------------------------------------------------
+
+    Struttura    Caratteristiche                                  Sintassi
+    ---------    ----------------------------------------------   ----------------
+    Lista        ordinata, modificabile, ammette duplicati        []
+    Tupla        ordinata, non modificabile, ammette duplicati    ()
+    Set          non ordinato, senza duplicati                    {}
+    Dizionario   coppie chiave-valore, chiavi univoche            {chiave: valore}

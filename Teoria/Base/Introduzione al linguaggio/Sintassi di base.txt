@@ -1,70 +1,312 @@
-La sintassi di base del linguaggio è molto semplice:
-    - Commenti:
-        I commenti sono sezioni di programma ignorati dall'interprete e servono
-        per descrivere un determinato pezzo di codice o altro.
+================================================================================
+SINTASSI DI BASE DI PYTHON
+================================================================================
 
-        Esistono 2 tipi di commento, ovvero:
-            - Commento di linea ---> Serve per spiegare ad esempio cosa fa un determinato ciclo
-            - Commento multilinea ---> Serve per spiegare ad esempio una funzione in modo completo
 
-        Il commento di linea viene definito col carattere #,
-        mentre il multi linea con ''' '''.
+1. INTRODUZIONE
+--------------------------------------------------------------------------------
 
-    - Dichiarazione delle variabili:
-        Per dichiarare una variabile è molto semplice, perchè il tipo della
-        variabile viene assegnato automaticamente dal compilatore in base al
-        valore che viene inserito
+La sintassi di base di Python e' molto semplice. Gli elementi fondamentali sono:
 
-        La dichiarazione segue la seguente sintassi:
-            variable_name = value
+    - commenti;
+    - variabili;
+    - operazioni di input/output;
+    - operatori;
+    - blocchi di controllo (if);
+    - cicli (for e while).
 
-    - Operazioni I/O:
-        Questo tipo di operazioni servono per stampare un valore oppure chiedere
-        all'utente di inserire un valore.
+In Python l'INDENTAZIONE (gli spazi a inizio riga) e' obbligatoria: serve a
+definire quali istruzioni appartengono a un blocco. Si usano di norma 4 spazi.
+Una indentazione errata genera l'errore IndentationError.
 
-        Per stampare un qualcosa, si utilizza la funzione print(), mentre per l'input
-        si utilizza la funzione input()
 
-        La sintassi di base per l'input è la seguente
-            variable_name = input(" ")
+2. COMMENTI
+--------------------------------------------------------------------------------
 
-        NOTA BENE:
-            la funzione input ritorna una stringa, quindi se si deve prendere in input un
-            numero, si deve fare il casting di tipo:
-                - int(input()) ---> Per i numeri interi
-                - float(input()) ---> Per i numeri con la virgola
+I commenti sono sezioni del programma ignorate dall'interprete: servono a
+descrivere un determinato pezzo di codice o altro.
 
-    - Blocchi di controllo:
-        I blocchi di controllo permettono di verificare se una determinata condizione
-        e vera o falsa.
+Esistono 2 tipi di commento:
 
-        La sintassi di base è la seguente:
-            if variabile_da_controllare == valore
-        Gli operatori logici sono i seguenti:
-            - == ---> Controllo dell'uguaglianza
-            - != ---> Controllo della diversità
-            - >, <, >=, <= ---> Maggiore, minore, maggiore o uguale, minore o uguale
+    - Commento di linea     ---> spiega ad esempio cosa fa un determinato ciclo
+    - Commento multilinea   ---> spiega ad esempio una funzione in modo completo
 
-    - Cicli:
-        I cicli servono per eseguire determinate istruzioni N volte ed esistono 2
-        tipi di cicli, ovvero:
-            - for ---> Eseguire le istruzioni per un numero finito di volte;
-            - while ---> Eseguire le istruzioni fino a quando la condizione è vera
+Il commento di linea si definisce con il carattere #. Tutto cio' che segue il
+simbolo # fino a fine riga viene ignorato.
 
-        La sintassi dei cicli è la seguente:
-            - for i in range(n): ---> n sta per il numero di volte che si deve fare il ciclo
-                                      mentre la i e l'iteratore(se la variabile i non deve essere
-                                      usata nel ciclo, si puo sostituire con il carattere _)
+    # Questo e' un commento di linea
+    x = 5    # commento a fine riga
 
-            - while condizione:
-                istruzioni da eseguire
+Il commento multilinea si scrive con tre apici (''' ''' oppure """ """):
 
-    - Operatori matematici:
-        In Python, ci sono vari operatori matematici da poter utilizzare quando si fanno
-        operazioni matematiche, e sono:
-            - += ---> Somma
-            - -= ---> Sottrazione
-            - *= ---> Moltiplicazione
-            - /= ---> Divisione
-            - %= ---> Modulo
-            - **= ---> Elevamento a potenza
+    '''
+    Questo e' un commento
+    su piu' righe
+    '''
+
+NOTA: tecnicamente i tre apici creano una stringa multilinea che non viene
+assegnata a nessuna variabile, e quindi viene ignorata. Python non ha una vera
+sintassi per i commenti multilinea. Si possono anche scrivere piu' righe,
+ognuna con il simbolo #. Quando il testo multilinea e' scritto subito dopo la
+definizione di una funzione, e' chiamato docstring e documenta la funzione.
+
+
+3. DICHIARAZIONE DELLE VARIABILI
+--------------------------------------------------------------------------------
+
+Dichiarare una variabile e' molto semplice, perche' il tipo della variabile
+viene assegnato automaticamente dall'interprete in base al valore che viene
+inserito (tipizzazione dinamica).
+
+Sintassi:
+
+    variable_name = value
+
+Esempi:
+
+    nome = "Mario"      # str   (stringa)
+    eta = 17            # int   (numero intero)
+    altezza = 1.75      # float (numero con la virgola)
+    maggiorenne = False # bool  (vero o falso)
+
+    print(type(eta))    # <class 'int'>
+
+Il tipo di una variabile puo' cambiare se le si assegna un nuovo valore:
+
+    x = 10
+    x = "dieci"
+
+Regole per i nomi delle variabili:
+
+  - possono contenere lettere, numeri e il carattere _ ;
+  - non possono iniziare con un numero;
+  - non possono contenere spazi ne' simboli speciali;
+  - distinguono le maiuscole dalle minuscole (eta ed Eta sono variabili diverse);
+  - non possono coincidere con le parole riservate (if, for, while, ...).
+
+Per i nomi si usa lo stile snake_case: nome_utente, numero_studenti.
+
+
+4. OPERAZIONI DI I/O (INPUT/OUTPUT)
+--------------------------------------------------------------------------------
+
+Le operazioni di I/O servono per stampare un valore oppure per chiedere
+all'utente di inserire un valore.
+
+OUTPUT: per stampare si utilizza la funzione print().
+
+    print("Ciao")
+    print("Mario", 17)            # Mario 17
+    print("Nome:", nome)
+
+INPUT: per leggere un valore dalla tastiera si utilizza la funzione input().
+
+Sintassi di base:
+
+    variable_name = input("messaggio da mostrare")
+
+    nome = input("Inserisci il tuo nome: ")
+    print("Ciao", nome)
+
+NOTA BENE:
+    la funzione input() restituisce SEMPRE una stringa. Se si deve prendere in
+    input un numero, si deve fare il casting di tipo (conversione):
+
+    - int(input())      ---> per i numeri interi
+    - float(input())    ---> per i numeri con la virgola
+
+    eta = int(input("Inserisci l'eta': "))
+    altezza = float(input("Inserisci l'altezza: "))
+
+    print(eta + 1)
+
+Se l'utente inserisce un valore non convertibile (ad esempio "abc" per un
+intero) viene generato un ValueError, che si puo' gestire con try...except.
+
+
+5. OPERATORI
+--------------------------------------------------------------------------------
+
+5.1 Operatori aritmetici
+
+    +       somma
+    -       sottrazione
+    *       moltiplicazione
+    /       divisione (il risultato e' sempre un float)
+    //      divisione intera (scarta la parte decimale)
+    %       modulo (resto della divisione)
+    **      elevamento a potenza
+
+    print(7 + 2)        # 9
+    print(7 / 2)        # 3.5
+    print(7 // 2)       # 3
+    print(7 % 2)        # 1
+    print(2 ** 3)       # 8
+
+5.2 Operatori di assegnazione composta
+
+Combinano un'operazione aritmetica con l'assegnazione: la variabile viene
+aggiornata con il risultato dell'operazione.
+
+    +=      somma
+    -=      sottrazione
+    *=      moltiplicazione
+    /=      divisione
+    //=     divisione intera
+    %=      modulo
+    **=     elevamento a potenza
+
+    x = 10
+    x += 5              # equivale a x = x + 5     ---> 15
+    x -= 3              # equivale a x = x - 3     ---> 12
+    x *= 2              # equivale a x = x * 2     ---> 24
+    x /= 4              # equivale a x = x / 4     ---> 6.0
+    x %= 4              # equivale a x = x % 4     ---> 2.0
+    x **= 3             # equivale a x = x ** 3    ---> 8.0
+
+5.3 Operatori di confronto
+
+Confrontano due valori e restituiscono True oppure False.
+
+    ==      uguaglianza
+    !=      diversita'
+    >       maggiore
+    <       minore
+    >=      maggiore o uguale
+    <=      minore o uguale
+
+ATTENZIONE: per controllare l'uguaglianza si usa == (doppio uguale); il
+singolo = serve per assegnare un valore a una variabile.
+
+5.4 Operatori logici
+
+Combinano piu' condizioni:
+
+    and     vero se TUTTE le condizioni sono vere
+    or      vero se ALMENO UNA condizione e' vera
+    not     inverte il valore (vero diventa falso e viceversa)
+
+    eta = 17
+    print(eta >= 14 and eta < 18)       # True
+
+
+6. BLOCCHI DI CONTROLLO (IF)
+--------------------------------------------------------------------------------
+
+I blocchi di controllo permettono di verificare se una determinata condizione
+e' vera o falsa ed eseguire istruzioni diverse di conseguenza.
+
+Sintassi di base:
+
+    if condizione:
+        istruzioni da eseguire se la condizione e' vera
+
+    if variabile_da_controllare == valore:
+        istruzioni
+
+ATTENZIONE: la riga dell'if termina sempre con i due punti (:) e le istruzioni
+da eseguire devono essere indentate.
+
+Sintassi completa con elif ed else:
+
+    if condizione1:
+        istruzioni eseguite se condizione1 e' vera
+    elif condizione2:
+        istruzioni eseguite se condizione1 e' falsa e condizione2 e' vera
+    else:
+        istruzioni eseguite se nessuna condizione e' vera
+
+Esempio:
+
+    voto = int(input("Inserisci il voto: "))
+
+    if voto >= 6:
+        print("Sufficiente")
+    elif voto >= 5:
+        print("Quasi sufficiente")
+    else:
+        print("Insufficiente")
+
+Gli operatori da usare nelle condizioni sono quelli di confronto (==, !=, >,
+<, >=, <=) e quelli logici (and, or, not), descritti nella sezione 5.
+
+
+7. CICLI
+--------------------------------------------------------------------------------
+
+I cicli servono per eseguire determinate istruzioni piu' volte. Esistono 2 tipi
+di cicli:
+
+    - for   ---> esegue le istruzioni per un numero finito di volte;
+    - while ---> esegue le istruzioni fino a quando la condizione e' vera.
+
+7.1 Ciclo for
+
+Sintassi:
+
+    for i in range(n):
+        istruzioni da eseguire
+
+    n   e' il numero di volte che si deve ripetere il ciclo;
+    i   e' l'iteratore (la variabile che assume i valori 0, 1, ..., n-1).
+
+Se la variabile i non deve essere usata all'interno del ciclo, si puo'
+sostituire con il carattere _ :
+
+    for i in range(3):
+        print(i)            # stampa 0, 1, 2
+
+    for _ in range(3):
+        print("Ciao")       # stampa 3 volte "Ciao"
+
+La funzione range() accetta fino a 3 argomenti:
+
+    range(n)                da 0 a n-1
+    range(inizio, fine)     da inizio a fine-1
+    range(inizio, fine, passo)
+
+    for i in range(1, 10, 2):
+        print(i)            # 1, 3, 5, 7, 9
+
+7.2 Ciclo while
+
+Sintassi:
+
+    while condizione:
+        istruzioni da eseguire
+
+Il ciclo si ripete finche' la condizione e' vera. Se la condizione non diventa
+mai falsa si ottiene un ciclo infinito, quindi dentro il ciclo deve esserci
+un'istruzione che prima o poi la renda falsa.
+
+    contatore = 0
+    while contatore < 3:
+        print(contatore)
+        contatore += 1      # senza questa riga il ciclo sarebbe infinito
+
+7.3 break e continue
+
+    break       interrompe subito il ciclo
+    continue    salta alla ripetizione successiva, ignorando le istruzioni
+                rimanenti
+
+    for i in range(5):
+        if i == 3:
+            break
+        print(i)            # stampa 0, 1, 2
+
+
+8. RIEPILOGO
+--------------------------------------------------------------------------------
+
+    Elemento             Sintassi
+    ------------------   ---------------------------------------------
+    Commento di linea    # commento
+    Commento multilinea  ''' commento '''
+    Variabile            nome = valore
+    Output               print(valore)
+    Input                nome = input("messaggio")
+    Input numerico       int(input()) oppure float(input())
+    Condizione           if condizione: ... elif ...: ... else: ...
+    Ciclo for            for i in range(n):
+    Ciclo while          while condizione:

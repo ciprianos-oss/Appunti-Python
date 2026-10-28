@@ -1,19 +1,240 @@
-Le stringhe sono la concatenazione di varie lettere e possono essere racchiuse tra:
-    - ' ';
-    - " "
+================================================================================
+LE STRINGHE IN PYTHON
+================================================================================
 
-Le stringhe possono essere visualizzate tramite la funzione print() e al loro
-interno possono contenere delle citazioni:
-    - "testo con 'citazione'";
-    - 'testo con "citazione"'
 
-L'assegnazione delle stringhe in una variabile può essere fatta in 2 modi differenti, ovvero:
-    - In dichiarazione:
-        a = "Stringa"
-    - Input dell'utente
-        a = input("Inserisci una stringa: ")
+1. DEFINIZIONE
+--------------------------------------------------------------------------------
 
-    Inoltre si puo assegnare un testo in una variabile nella seguente maniera
-        a = """ Testo
-                multi
-                linea"""
+Le stringhe (tipo str) sono sequenze di caratteri: la concatenazione di piu'
+lettere, numeri, simboli e spazi che formano un testo.
+
+Una stringa si scrive racchiudendo il testo tra apici singoli oppure tra apici
+doppi. I due modi sono equivalenti.
+
+    - ' '    apici singoli
+    - " "    apici doppi
+
+    a = "Ciao"
+    b = 'Ciao'
+    print(a, b)         # Ciao Ciao
+    print(type(a))      # <class 'str'>
+
+
+2. CARATTERISTICHE PRINCIPALI
+--------------------------------------------------------------------------------
+
+2.1 Sequenze ordinate
+    I caratteri di una stringa hanno una posizione precisa (indice). Il primo
+    carattere ha indice 0.
+
+2.2 Immutabili
+    Una volta creata, una stringa non puo' essere modificata: i metodi che
+    sembrano modificarla restituiscono in realta' una NUOVA stringa.
+
+    s = "ciao"
+    s[0] = "C"          # TypeError: 'str' object does not support
+                        # item assignment
+
+2.3 Possono contenere qualsiasi carattere
+    Lettere, numeri, simboli e spazi. Una stringa vuota si scrive "".
+
+    Attenzione: "123" e' una stringa (testo), non un numero.
+
+
+3. VISUALIZZARE UNA STRINGA
+--------------------------------------------------------------------------------
+
+Le stringhe si visualizzano con la funzione print():
+
+    print("Hello World")
+
+Citazioni all'interno di una stringa
+
+Se il testo contiene degli apici, si usa il tipo di apice diverso da quello
+che racchiude la stringa:
+
+    print("testo con 'citazione'")      # testo con 'citazione'
+    print('testo con "citazione"')      # testo con "citazione"
+
+Lo stesso risultato si ottiene con il carattere di escape \ (barra rovesciata):
+
+    print("testo con \"citazione\"")    # testo con "citazione"
+    print('l\'anno scorso')             # l'anno scorso
+
+
+4. ASSEGNAZIONE DI UNA STRINGA A UNA VARIABILE
+--------------------------------------------------------------------------------
+
+Una stringa puo' essere assegnata a una variabile in 3 modi.
+
+4.1 In dichiarazione
+
+    a = "Stringa"
+
+4.2 Input dell'utente
+
+    a = input("Inserisci una stringa: ")
+
+    NOTA: input() restituisce SEMPRE una stringa, anche se l'utente scrive un
+    numero. Per ottenere un numero bisogna convertirlo: int(a) oppure float(a).
+
+4.3 Stringa su piu' righe (apici tripli)
+
+Per assegnare un testo che si estende su piu' righe si usano tre apici doppi
+(oppure tre apici singoli):
+
+    a = """Testo
+    multi
+    linea"""
+
+    print(a)
+
+    Output:
+        Testo
+        multi
+        linea
+
+Gli a capo e gli spazi scritti all'interno degli apici tripli vengono
+conservati nella stringa.
+
+
+5. CARATTERI SPECIALI (SEQUENZE DI ESCAPE)
+--------------------------------------------------------------------------------
+
+All'interno di una stringa, la barra rovesciata \ seguita da un carattere
+inserisce un carattere speciale:
+
+    \n      a capo
+    \t      tabulazione
+    \\      barra rovesciata
+    \'      apice singolo
+    \"      apici doppi
+
+    print("Prima riga\nSeconda riga")
+    print("Nome:\tMario")
+
+
+6. LUNGHEZZA DI UNA STRINGA
+--------------------------------------------------------------------------------
+
+La funzione len() restituisce il numero di caratteri della stringa (spazi
+compresi):
+
+    a = "Ciao mondo"
+    print(len(a))       # 10
+
+
+7. ACCESSO AI CARATTERI
+--------------------------------------------------------------------------------
+
+Si accede a una determinata posizione della stringa tramite l'indice, scritto
+tra parentesi quadre:
+
+    stringa[n]          # n = indice del carattere a cui accedere
+
+    a = "Python"
+    print(a[0])         # P (primo carattere)
+    print(a[3])         # h
+
+Indici negativi (si parte dalla fine):
+
+    print(a[-1])        # n (ultimo carattere)
+    print(a[-2])        # o
+
+Accedere a un indice inesistente genera l'errore IndexError.
+
+Slicing (estrazione di una parte della stringa, il risultato e' una stringa):
+
+    print(a[0:3])       # Pyt  (dall'indice 0 al 2, il 3 e' escluso)
+    print(a[:2])        # Py
+    print(a[2:])        # thon
+    print(a[::-1])      # nohtyP (stringa invertita)
+
+
+8. CONCATENAZIONE E RIPETIZIONE
+--------------------------------------------------------------------------------
+
+Per concatenare (unire) due stringhe si usa l'operatore +:
+
+    - stringa1 + stringa2          ---> senza spazio tra le stringhe
+    - stringa1 + ' ' + stringa2    ---> con lo spazio tra le stringhe
+
+    nome = "Mario"
+    cognome = "Rossi"
+
+    print(nome + cognome)           # MarioRossi
+    print(nome + ' ' + cognome)     # Mario Rossi
+
+ATTENZIONE: con + si possono unire solo stringhe. Unire una stringa e un
+numero genera un TypeError: il numero va convertito con str().
+
+    eta = 17
+    print("Eta': " + str(eta))      # Eta': 17
+
+Ripetizione con l'operatore *:
+
+    print("ab" * 3)                 # ababab
+    print("-" * 20)                 # --------------------
+
+
+9. VERIFICARE LA PRESENZA DI UN TESTO
+--------------------------------------------------------------------------------
+
+Gli operatori in e not in verificano se una stringa e' contenuta in un'altra:
+
+    frase = "Il gatto dorme"
+    print("gatto" in frase)         # True
+    print("cane" not in frase)      # True
+
+
+10. SCORRERE UNA STRINGA
+--------------------------------------------------------------------------------
+
+Una stringa si puo' scorrere carattere per carattere con un ciclo for:
+
+    for lettera in "Ciao":
+        print(lettera)
+
+
+11. FORMATTAZIONE DELLE STRINGHE (F-STRING)
+--------------------------------------------------------------------------------
+
+Le f-string permettono di inserire variabili ed espressioni dentro una stringa.
+Si scrivono con la lettera f prima degli apici e le variabili tra graffe:
+
+    nome = "Mario"
+    eta = 17
+    print(f"{nome} ha {eta} anni")          # Mario ha 17 anni
+    print(f"Tra un anno avra' {eta + 1} anni")
+
+Sono piu' comode e leggibili della concatenazione con +, perche' non serve
+convertire i numeri con str().
+
+
+12. CONFRONTO TRA STRINGHE
+--------------------------------------------------------------------------------
+
+Le stringhe si confrontano con gli operatori ==, !=, <, >:
+
+    print("ciao" == "ciao")         # True
+    print("Ciao" == "ciao")         # False (maiuscole e minuscole contano)
+
+Il confronto distingue le lettere maiuscole dalle minuscole. Per ignorare la
+differenza si converte prima il testo con lower() o upper().
+
+
+13. RIEPILOGO
+--------------------------------------------------------------------------------
+
+    Operazione             Sintassi               Risultato
+    --------------------   --------------------   ---------------------------
+    Lunghezza              len(s)                 numero di caratteri
+    Accesso a un carattere s[n]                   carattere in posizione n
+    Porzione               s[a:b]                 caratteri da a a b-1
+    Concatenazione         s1 + s2                nuova stringa unita
+    Ripetizione            s * n                  stringa ripetuta n volte
+    Presenza               "x" in s               True oppure False
+
+I metodi delle stringhe (upper, lower, count, replace e altri) sono descritti
+nel file dedicato: metodi_stringhe_python.txt
