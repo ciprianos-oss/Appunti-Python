@@ -1,0 +1,45 @@
+==============================================================================
+ESERCIZIO GUIDATO: GLI ARRAY IN PYTHON
+Gestione delle temperature settimanali
+==============================================================================
+
+LIVELLO: base
+ARGOMENTI: liste (array), indici, cicli for, funzioni built-in, metodi delle liste
+
+
+------------------------------------------------------------------------------
+1. OBIETTIVI
+------------------------------------------------------------------------------
+
+Al termine dell'esercizio sarai in grado di:
+
+  - creare un array (lista) e popolarlo con dati inseriti da tastiera
+  - accedere agli elementi tramite indice (anche negativo)
+  - scorrere un array con un ciclo for
+  - calcolare somma, media, minimo e massimo con le funzioni built-in
+  - cercare un elemento e contarne le occorrenze
+
+
+------------------------------------------------------------------------------
+2. TRACCIA
+------------------------------------------------------------------------------
+
+Devi realizzare un programma che gestisca le temperature massime registrate
+in una settimana (7 giorni). Il programma memorizza i valori in un array e
+ne ricava alcune statistiche.
+
+Il programma deve lavorare su una lista chiamata "temperature" e utilizzare
+un secondo array, "giorni", che contiene i nomi dei giorni della settimana.
+
+
+------------------------------------------------------------------------------
+OUTPUT FINALE ATTESO (ESEMPIO)
+------------------------------------------------------------------------------
+
+  Temperatura minima: 14.0
+  Temperatura massima: 24.5
+  Media settimanale: 19.3
+  Giorno piu caldo: sabato
+  Giorni sopra la media: martedi, giovedi, sabato, domenica (4)
+
+==============================================================================

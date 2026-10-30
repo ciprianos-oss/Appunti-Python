@@ -1,0 +1,79 @@
+================================================================================
+GLI ARRAY IN PYTHON
+================================================================================
+
+
+1. DEFINIZIONE
+--------------------------------------------------------------------------------
+
+Un Array è una variabile speciale che può contenere più di un valore
+contemporaneamente ed è possibile accedere ai suoi valori facendo riferimento
+al numero di indice.
+
+N.B:
+    Python non supporta nativamente gli Array, ma è possibile utilizzare le
+    liste come loro alternativa.
+
+    Per poter lavorare nativamente con gli Array in Python, è necessario
+    importare una libreria, come la NumPy.
+
+
+2. CREAZIONE DI UN ARRAY ED ACCESSO AI SUOI ELEMENTI
+--------------------------------------------------------------------------------
+
+Per poter creare un Array in Python, la sintassi da seguire è:
+    nome_array = []
+
+Per poter accedere ad un elemento dell'Array, si utilizza il numero dell'indice
+e la sintassi è:
+    nome_array[numero_indice]
+
+Grazie a questa sintassi, si può modificare e/o assegnare ad una variabile un
+determinato valore dell'Array se si conosce l'indice del valore.
+
+
+3. OPERAZIONI CHE SI POSSONO ESEGUIRE SUGLI ARRAY
+--------------------------------------------------------------------------------
+
+Le operazioni fondamentali che si possono effettuare sugli Array sono:
+    - Aggiunta di elementi
+    - Rimozione di elementi
+    - Contare il numero di elementi
+    - Ordinarli
+
+Per poter aggiungere un elemento all'interno dell'Array si usano i seguenti
+metodi:
+    - append() ---> Inserisce un elemento alla fine dell'Array
+    - insert() ---> Inserisce un elemento alla posizione specificata
+La loro sintassi è la seguente:
+    - nome_array.append(elemento da inserire)
+    - nome_array.insert(posizione, elemento)
+
+Invece, per poter rimuovere un elemento dall'Array si hanno 2 metodi,
+ovvero:
+    - pop()    ---> Rimuove l'elemento all'indice indicato
+    - remove() ---> Rimuove solamente la prima occorrenza del valore specificato
+La loro sintassi è la seguente:
+    - nome_array.pop(indice dell'elemento da rimuovere)
+    - nome_array.remove(elemento da rimuovere)
+
+Invece, per contare il numero di elementi all'interno dell'Array, si hanno 2
+funzioni integrate, ovvero:
+    - len()   ---> Restituisce la lunghezza dell'Array(ovvero il numero di elementi)
+    - count() ---> Restituisce il numero di elementi specificato al suo intero
+La loro sintassi è la seguente:
+    - len(nome_array)
+    - nome_array.count(elemento da contare)
+
+Infine, per orinare l'Array, si utilizza il metodo sort() e la sua sintassi
+è:
+    nome_array.sort()
+
+4. ITERARE SUGLI ELEMENTI
+--------------------------------------------------------------------------------
+
+Per poter iterare sugli elementi degli Array indipendentemente se si conoscono
+o no il numero dei suoi elementi, si può usare un ciclo for con la seguente
+sintassi:
+    for i in nome_array:
+        operazioni da eseguire

@@ -1,0 +1,58 @@
+================================================================================
+
+ESERCIZIO PYTHON: Gestione delle Attività Extrascolastiche con i Set
+
+================================================================================
+
+Scrivere un programma in Python per gestire le iscrizioni degli studenti a tre
+attività extrascolastiche: Calcio, Basket e Teatro.
+
+
+1. DEFINIZIONE E PULIZIA DEI DATI
+---------------------------------
+
+Crea tre set iniziali con i nomi dei partecipanti.
+
+N.B:
+    Inserisci volutamente alcuni nomi duplicati nelle liste di partenza per
+    testare la capacità dei set di rimuovere i doppioni in automatico.
+
+    * Calcio: "Marco", "Luca", "Giulia", "Marco", "Sara", "Luca"
+    * Basket: "Sara", "Elena", "Luca", "Paolo", "Elena"
+    * Teatro: "Giulia", "Elena", "Davide", "Sara"
+
+Stampa a schermo il contenuto di ciascun set e il numero totale di iscritti
+unici per ciascuna attività (sfruttando la funzione len()).
+
+
+2. VERIFICA DELL'APPARTENENZA
+-----------------------------
+
+Chiedi all'utente di inserire un nome tramite input da tastiera (input()).
+
+Utilizzando le condizioni, verifica e stampa:
+
+    - Se la persona fa calcio.
+    - Se la persona fa basket.
+    - Se la persona fa teatro.
+    - Un messaggio specifico se la persona non è iscritta a nessuna attività.
+
+
+3. OPERAZIONI SUI SET
+---------------------
+
+Sfrutta gli operatori nativi dei set per calcolare e stampare:
+
+    - Tutti gli studenti unici che partecipano ad almeno un'attività (Unione).
+    - Gli studenti che fanno sia calcio che basket (Intersezione).
+    - Gli studenti che fanno calcio ma non teatro (Differenza).
+    - Gli studenti che fanno basket o teatro, ma non entrambi (Differenza simmetrica).
+
+
+4. MODIFICA DEI SET
+-------------------
+
+Aggiorna i set applicando le seguenti modifiche:
+    - Aggiungi "Chiara" al gruppo di teatro.
+    - Rimuovi "Paolo" dal gruppo di basket.
+    - Stampa i set aggiornati di Teatro e Basket per confermare i cambiamenti.

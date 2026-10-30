@@ -1,0 +1,156 @@
+================================================================================
+LA OOP IN PYTHON
+================================================================================
+
+
+1. DEFINIZIONE
+--------------------------------------------------------------------------------
+
+La OOP è l'abbreviazione di Object-Oriented Programming, ovvero Programmazione
+Orientata agli Oggetti.
+
+La OOP serve principalmente per una migliore organizzazione e riutilizzabilità
+del codice ed i suoi vantaggi sono:
+    - Fornire una struttura chiara ai programmi;
+    - Rende il codice più facile da mantenere, riutilizzarlo e sottoporlo a debug;
+    - Aiuta a mantenere il codice DRY(Don't Repeat Yourself);
+    - Consente di creare applicazioni riutilizzabili con meno codice
+
+
+2. CHE COS'E' UNA CLASSE E UN OGGETTO
+--------------------------------------------------------------------------------
+
+Una classe è una struttura di programmazione che definisce un modello astratto
+per creare oggetti specificandone:
+    - Attributi ---> Ovvero i dati;
+    - Metodi    ---> Operazioni e comportamenti
+
+Invece una classe è un'istanza concreta di una classe, caratterizzata da uno stato
+e definito dai valori dei suoi attributi e dai comportamenti definiti dai suoi
+metodi.
+
+
+3. CREAZIONE DI UNA CLASSE
+--------------------------------------------------------------------------------
+
+Per creare una classe si utilizza la parola chiave class.
+
+Sintassi:
+
+    class nome_classe:
+        metodi, istruzioni ecc...
+
+ATTENZIONE: la riga def termina con i due punti (:) e le istruzioni della
+classe devono essere indentate.
+
+Per poter creare un oggetto da richiamare, bisogna innanzitutto creare un oggetto:
+
+    nome_oggetto = nome_classe()
+
+Inoltre è possibile creare oggetti multipli della stessa classe:
+
+    class MyClass:
+        x = 5
+
+    p1 = MyClass()
+    p2 = MyClass()
+    p3 = MyClass()
+
+    print(p1)
+    print(p2)
+    print(p3)
+
+4. METODO __init__() DELLA CLASSE
+--------------------------------------------------------------------------------
+
+Tutte le classi hanno un metodo integrato chiamato __init__(), che viene sempre
+eseguito quando la classe viene inizializzata e viene chiamato automaticamente
+ogni volta che la classe viene usata per creare un nuovo oggetto.
+
+Il metodo __init()__ viene utilizzato per assegnare valori alle proprietà di un
+oggetto o per eseguire operazioni necessarie durante la sua creazione e può
+avere tutti i parametri necessari per essere creata correttamente.
+
+EX.:
+    class Person:
+        def __init__(self, Name, Surname, Age):
+            self.Name    = Name
+            self.Surname = Surname
+            self.Age     = Age
+
+Inoltre è possibile impostare valori predefiniti per i parametri della funzione.
+
+EX:
+    class Person:
+        def __init__(self, Name, Surname, Age = 18):
+            self.Name    = Name
+            self.Surname = Surname
+
+5. PERCHE' USARE IL METODO __init__()
+--------------------------------------------------------------------------------
+
+Senza questo metodo, bisognerebbe impostare manualmente le proprietà per ogni
+oggetto che si crea per la classe, mentre l'uso di questa funzione integrata
+semplifica la creazione degli oggetti di una determinata classe.
+
+6. PARAMETRO self E MOTIVI DI UTILIZZO
+--------------------------------------------------------------------------------
+
+Il parametro self è un riferimento all'istanza corrente della classe e viene
+utilizzato per accedere alle proprietà e ai metodi appartenenti alla classe.
+
+N.B:
+    Il parametro self deve essere il primo parametro di qualsiasi metodo della
+    classe.
+
+Il motivo principale del perché si utilizza questo parametro, è dovuto dal fatto
+che senza questo parametro Python non saprebbe a quali proprietà dell'oggetto
+si desidera accedere.
+
+Tramite questo parametro, si possono accedere sia a metodi sia a qualsiasi
+proprietà della classe.
+
+EX 1:
+    class Car:
+        def __init__(self, brand, model, year):
+            self.brand = brand
+            self.model = model
+            self.year  = year
+
+        def display_info(self):
+            print(f"{self.year} {self.brand} {self.model}")
+
+    car1 = Car("Toyota", "Corolla", 2020)
+    car1.display_info()
+
+EX 2:
+    class Person:
+        def __init__(self, name):
+            self.name = name
+
+        def greet(self):
+            return "Hello, " + self.name
+
+        def welcome(self):
+            message = self.greet()
+            print(message + "! Welcome to our app.")
+
+    p1 = Person("Tobias")
+    p1.welcome()
+
+
+7. METODI
+--------------------------------------------------------------------------------
+
+I metodi sono funzioni che appartengono ad una classe e definiscono il
+comportamento degli oggetti creati a partire da una determinata classe.
+Inoltre all'interno di una classe si possono definire N metodi
+
+N.B:
+    Tutti i metodi devono avere self come primo parametro
+
+I metodi possono accettare parametri proprio come le funzioni normali e per
+poter accedere alle proprietà degli oggetti, si utilizza il parametro self.
+
+Oltre ad accedere alle proprietà della classe, col parametro self si può
+accedere anche ai metodi della classe

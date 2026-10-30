@@ -1,0 +1,6 @@
+Chiedere una frase in input e mandare a video:
+- Frase al contrario
+- Dire se e palondroma
+- Contare vocali e consonanti
+- Visualizzare i primi 3 e gli ultimi 3 caratteri
+- Visualizzare la frase senza il primo e l'ultimo carattere

@@ -1,0 +1,9 @@
+Scrivere un programma che permetta di inserire
+alcuni nomi di studenti e salvarli nel file
+stud.txt uno per riga
+
+Il programma deve:
+    - Visualizzare tutti i nomi;
+    - Contare quanti studenti sono presenti;
+    - Chiedere un nome da cercare e dire se è presente oppure no;
+    - Visualizzare i nomi in ordine alfabetico

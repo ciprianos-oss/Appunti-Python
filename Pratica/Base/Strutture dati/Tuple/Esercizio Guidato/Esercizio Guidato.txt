@@ -1,0 +1,13 @@
+Statistiche sul lancio di un dado
+
+Obiettivo: Scrivere un programma in Python che simuli il lancio di un dado a sei facce e ne analizzi i risultati.
+
+Traccia:
+    Un dado a 6 facce è rappresentato da una tupla contenente i numeri da 1 a 6. Il programma deve:
+        - Chiedere all’utente quanti lanci desidera effettuare.
+        - Simulare i lanci, scegliendo ogni volta una faccia a caso tra quelle del dado, e memorizzare tutti i risultati in una lista.
+        - Stampare la lista completa dei risultati ottenuti.
+        - Stampare il numero massimo e il numero minimo usciti.
+        - Stampare quante volte è uscito il numero 6.
+        - Individuare ed elencare i numeri che non sono mai usciti durante i lanci.
+        - Se non è uscito nessun numero mancante (cioè sono usciti tutti i numeri da 1 a 6 almeno una volta), il programma deve mostrare un messaggio che lo segnali.

@@ -1,0 +1,4 @@
+Sorteggiare un numero da 1 a 10 e chiedere all'utente un numero:
+    - Stampare il numero di tentativi
+    - Dire se è stato trovato in 5 tentativi
+    - Se è stato trovato, dire in quanti tentativi è stato trovato il numero

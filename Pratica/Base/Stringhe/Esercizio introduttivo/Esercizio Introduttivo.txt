@@ -1,0 +1,6 @@
+Chiedere una frase e mandare a video:
+- Numero di caratteri
+- Primo e ultimo carattere
+- Frase in maiuscolo e minuscolo
+- Contare quante volte c'e la 'a'
+- Sostituire gli spazi con '-'

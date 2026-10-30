@@ -26,32 +26,26 @@ Attraverso questa repository si vogliono raggiungere i seguenti obiettivi:
 ```
 Appunti Python/ 
 ├── Client-server/                                  # Programmi di base per client e server                               
-├── Laboratorio/                                    # Appunti del programma del linguaggio Python
+├── Pratica/                                        # Appunti del programma del linguaggio Python
 │   ├── Base/                                       # Cartella contenente al suo interno le basi del linguaggio
 │   │   ├── File/                                   
 │   │   │   ├── File JSON/                          
-│   │   │   └── File txt e CSV                      
-│   │   ├── Funzioni/                               
-│   │   │   ├── Esercizio_05_10_2026/               
-│   │   │   ├── Esercizio_per_casa/                 
-│   │   │   └── intro_funzioni.py                   
-│   │   ├── Intro_18_09_2026/                       
-│   │   │   ├── Esercizi_18_09_2026/                
-│   │   │   │   ├── Sequenza_Fibonacci/             
-│   │   │   │   └── Tavola_Pitagorica/              
-│   │   │   └── Intro_Python_18_09_2026.py          
-│   │   ├── Stringhe/                               
-│   │   │   ├── Esercizio/                          
-│   │   │   ├── esercizio_introduttivo_stringhe.py  
-│   │   │   └── intro_stringhe.py                   
-│   │   ├── Strutture dati/                         
+│   │   │   └── File txt e CSV/                      
+│   │   ├── Funzioni/                  
+│   │   ├── Introduzione al linguaggio/
+│   │   ├── Stringhe/                  
+│   │   ├── Strutture dati/  
+│   │   │   ├── Array/                 
 │   │   │   ├── Dictionary/                         
 │   │   │   ├── List/
 │   │   │   ├── Set/                               
 │   │   │   └── Tuple/                              
-│   │   └── try_except/                            
-│   │       ├── Esercizio/                          
-│   │       └── esercizio in classe.py              
+│   │   └── try_except/
+│   │
+│   └── Medio-Alto/                                 # Cartella contenente la pratica di livello Intermedio e alta del linguaggio
+│       ├── OOP/
+│       │   ├── Pilastri Fondamentali/
+│       │   └── Introduzione alla OOP.py
 │
 ├── Teoria/                                         # Cartella contenente la teoria degli argomenti trattati in laboratorio
 │   ├── Base/                                       # Cartella contenente la teoria di base del linguaggio
@@ -61,8 +55,17 @@ Appunti Python/
 │   │   ├── Stringhe/
 │   │   ├── Strutture dati/
 │   │   └── try_except/
+│   │
+│   └── Medio-Alto/                                 # Cartella contenente la teoria di livello Intermedio e alta del linguaggio
+│       ├── OOP/
+│       │   ├── Pilastri Fondamentali/
+│       │   └── Introduzione alla OOP.txt
+│
+├── CITATION.cff                                    # Documento per poter citare la repository
+├── CONTRIBUTING.md                                 # Documento che definisce il modo di contribuire alla repository
+├── LICENSE                                         # Licenza MIT della repo
 ├── README.md                                       # Documentazione della repo
-└── LICENSE                                         # Licenza MIT della repo
+└── SECURITY.md                                     # Documento contenente il modo di segnalare un problema di sicurezza e la natura degli appunti
 ```
 
 ## ⚙️ Requisiti e ambiente di esecuzione
